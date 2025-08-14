@@ -18,11 +18,14 @@
             {% endfor %}
             <td colspan="{{ i }}" class="list-group-category">{{ content.name }}</td>
           </tr>
-          {% for item in content.keywords %}
+          {% for subSkill in content.subSkills %}
             <tr>
               <td></td>
               <td class="list-group-name">
-                <b>{{ item }}</b>
+                <b>{{ subSkill.name }}:</b>
+                <div style="padding-left: 1.5em;">
+                  {{ subSkill.items | join: ", " }}
+                </div>
               </td>
             </tr>
           {% endfor %}
