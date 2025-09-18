@@ -85,10 +85,10 @@ layout: default
               {% continue %}
             {% endunless %}
           {% endif %}
-          {% if data[0] == 'meta' or data[1].size == 0 or data[0] == 'awards' or data[0] == 'publications' or data[0] == 'references' %} {% continue %} {% endif %}
+          {% if data[0] == 'meta' or data[1].size == 0 or data[0] == 'awards' or data[0] == 'publications' or data[0] == 'references' or data[0] == 'certificates' %} {% continue %} {% endif %}
           <a class="anchor" id="{{ data[0] }}"></a>
           <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">{{ data[0] | capitalize }}</h3>
+            <h3 class="card-title font-weight-bold">{{ data[0] | capitalize }}</h3>
             <div>
               {% case data[0] %}
                 {% when 'basics' %}

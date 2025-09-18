@@ -3,11 +3,9 @@
   contents:
     - name: Full Name
       value: Stefan Strainovic
-    - name: Date of Birth
-      value: 12th September 1997
     - name: Languages
       value: English, Serbian, French
-    - name: contact 
+    - name: Contact
       value: stefan.strain@outlook.com
 
 - title: Education
@@ -17,83 +15,67 @@
       institution: University of Caen, Normandy, France
       year: 2024
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Bachelors in Applied and Fondamental Mathematics
+        - Specialization in Biostatistics.
+        - Relevant coursework in Generalized Linear Models, Survival Analysis, Bayesian Statistics, and Clinical Trials.
+    - title: Bachelors in Applied and Fundamental Mathematics
       institution: University of Paris Diderot, Paris, France
       year: 2022
       description:
-        - Description 1.
-        - Description 2.
+        - Graduated with honors.
+        - Focus on Probability, Statistics, and Numerical Analysis.
 
 - title: Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Data Scientist (Internship)
+      institution: ENSICAEN, Caen, France
+      year: 2024
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - Developed a machine learning model to predict dementia progression from multimodal data (MRI, clinical, cognitive).
+        - Engineered features from neuroimaging data and performed statistical analysis on patient cohorts.
+        - The final model classifies patients and can be used to track the progression of dementia over time.
+    - title: Credit Risk Analyst (Internship)
+      institution: Karmen, Paris, France
+      year: 2023
       description:
-        - Description 1.
-        - Description 2.
-
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
-      description:
-
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
+        - Analyzed credit risk portfolios using statistical models and data analysis techniques.
+        - Developed and validated predictive models for default risk using logistic regression and machine learning methods.
+        - Created automated reports and dashboards to monitor portfolio performance and risk exposure.
 
 - title: Open Source Projects
   type: time_table
   contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+    - title: <a href="https://github.com/stefanstrain/Portfolio">Portfolio Website</a>
+      year: 2024-now
+      description: This personal portfolio website, built with Jekyll and the al-folio theme, to showcase my projects and skills.
+    - title: <a href="https://github.com/stefanstrain/Radiogenomics-Project">Radiogenomics Breast Cancer Analysis</a>
+      year: 2023
+      description: An analysis project investigating the link between radiomic features from MRI scans and genomic data in breast cancer patients to predict treatment response.
 
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 1921
+    - year: 2022
       items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
+        - University Honors Scholarship for academic excellence.
 
-- title: Academic Interests
+- title: Technical Skills
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Programming & Languages
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - Python (NumPy, pandas, scikit-learn, PyTorch, TensorFlow, Streamlit, FastAPI)
+        - R (Tidyverse, ggplot2, caret), SQL, Bash
+    - title: Data & MLOps
       items:
-        - Description 1.
-        - Description 2.
+        - Docker, Git/GitHub, MLflow, Airflow, dbt
+        - Cloud (GCP, AWS), Warehouses (BigQuery, Snowflake)
+    - title: Statistics & Machine Learning
+      items:
+        - GLMs, Survival Analysis, Bayesian Methods, Causal Inference
+        - Deep Learning (CNNs, Transformers), NLP, Computer Vision (MONAI, OpenCV)
 
 - title: Other Interests
   type: list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - <u>Hobbies:</u> Competitive Programming, Reading (Sci-Fi & History), Hiking.

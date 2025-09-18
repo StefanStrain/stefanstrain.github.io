@@ -177,22 +177,14 @@
           "name": "Calculus & analysis",
           "items": [
             "Multivariate calculus, Taylor expansions",
-            "Real/measure-theoretic basics (limits, convergence)",
-            "Functional analysis (Hilbert spaces, RKHS) (target)"
+            "Real/measure-theoretic basics (limits, convergence)"
           ]
         },
         {
           "name": "Probability",
           "items": [
             "Random variables, expectations, LLN/CLT",
-            "Stochastic processes (Markov chains, Gaussian Processes) (target)"
-          ]
-        },
-        {
-          "name": "Information Theory",
-          "items": [
-            "Entropy, Cross-Entropy, KL Divergence",
-            "Mutual Information, Variational bounds (ELBO)"
+            "Stochastic processes (Markov chains, GPs) (target)"
           ]
         },
         {
@@ -204,22 +196,15 @@
           ]
         },
         {
-          "name": "High-Dimensional Statistics",
-          "items": [
-            "Sparse regression (Lasso theory, SIS) (target)",
-            "Random Matrix Theory (basics) (target)"
-          ]
-        },
-        {
           "name": "Bayesian statistics",
           "items": [
             "Priors/posteriors, conjugacy",
-            "Computation (MCMC (HMC/NUTS), VI, ABC) (target)",
+            "Computation (MCMC (HMC/NUTS, Gibbs), VI (target))",
             "Hierarchical models, shrinkage"
           ]
         },
         {
-          "name": "Regression & multivariate methods",
+          "name": "Regression families & multivariate methods",
           "items": [
             "GLMs, GAMs, mixed effects",
             "PCA/PPCA, FA, ICA, manifold learning"
@@ -351,8 +336,8 @@
           "name": "Storage & warehousing",
           "items": [
             "Relational DBs (PostgreSQL/MySQL/SQLite)",
-            "Cloud warehouses (BigQuery, Snowflake)",
-            "Formats (CSV/Parquet, JSON, HDF5, Zarr)"
+            "Cloud warehouses (BigQuery, Snowflake, Redshift (target))",
+            "Formats (CSV/Parquet/Feather, HDF5, Zarr)"
           ]
         },
         {

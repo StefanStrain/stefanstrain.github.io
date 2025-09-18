@@ -1,11 +1,12 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+title: AI public speaking coach
+description: in development
+img: assets/img/public_speaking.jpg
 importance: 2
-category: work
+category: other
 giscus_comments: true
+wip: true
 ---
 
 Every project has a beautiful feature showcase page.

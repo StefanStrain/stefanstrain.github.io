@@ -24,7 +24,11 @@
               <td class="list-group-name">
                 <b>{{ subSkill.name }}:</b>
                 <div style="padding-left: 1.5em;">
-                  {{ subSkill.items | join: ", " }}
+                  {%- assign all_items_as_string = subSkill.items | join: ", " -%}
+                  {%- assign lines = all_items_as_string | split: ", ||, " -%}
+                  {% for line in lines %}
+                    {{ line }}{% unless forloop.last %}<br>{% endunless %}
+                  {% endfor %}
                 </div>
               </td>
             </tr>
