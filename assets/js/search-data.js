@@ -25,7 +25,7 @@ ninja.data = [{
           },
         },{id: "nav-cv",
           title: "cv",
-          description: "This is a more detailed Curriculum Vitae representing my skills and experiences in more depth, for a quick read please consult the pdf version.",
+          description: "This is a more detailed Curriculum Vitae representing my skills and experiences in more depth, for a quick read please consult the downloadable pdf version to the right.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
