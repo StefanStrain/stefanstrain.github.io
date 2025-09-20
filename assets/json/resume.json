@@ -97,8 +97,8 @@
       "name": "Hackathon: Bacteriophage Genomics Classification",
       "summary": "Participated in a biology-focused hackathon to build a model for classifying bacteriophage genomic sequences.",
       "highlights": [
-        "Fine-tuned a Large Language Model (LLM) to identify which gene sequences correspond to specific phage components (head, neck, tail).",
-        "Collaborated in a team to preprocess genomic data and train the model for high-accuracy classification."
+        "Fine-tuned a Large Language Model (LLM) on genetic data to identify which gene sequences correspond to specific phage components (head, neck, tail).",
+        "Collaborated in a team to preprocess genomic data and train the model for high accuracy classification."
       ],
       "startDate": "2024-06-01",
       "endDate": "2024-06-01",
@@ -307,8 +307,8 @@
           "name": "Architectures",
           "items": [
             "MLPs, CNNs (2D/3D), RNN/LSTM/GRU",
-            "Transformers (BERT-style, ViT/SwIN) (target)",
-            "Autoencoders/VAEs, diffusion models (target), GANs (target)"
+            "Transformers (BERT-style, ViT/SwIN)",
+            "Autoencoders/VAEs, diffusion models, GANs"
           ]
         },
         {
@@ -316,9 +316,9 @@
           "items": [
             "Preprocessing (filtering, morphology, bias-field correction)",
             "Tasks (classification, detection, segmentation)",
-            "Medical segmentation (U-Net, nnU-Net, 3D CNNs (target))",
-            "Registration, multi-modal fusion (target)",
-            "Tooling (OpenCV, MONAI (target), TorchIO, SimpleITK/ITK)",
+            "Medical segmentation (U-Net, nnU-Net, 3D CNNs)",
+            "Registration, multi-modal fusion",
+            "Tooling (OpenCV, MONAI, TorchIO, SimpleITK/ITK)",
             "Formats (DICOM, NIfTI, pydicom, NiBabel)",
             "Robustness (domain shift, TTA, uncertainty)"
           ]
@@ -327,17 +327,17 @@
           "name": "NLP & LLMs",
           "items": [
             "Classical (tokenisation, TF-IDF, topic models, NER basics)",
-            "Transformers (BERT fine-tuning, instruction tuning (target), LoRA/PEFT (target))",
+            "Transformers (BERT fine-tuning, instruction tuning )",
             "Retrieval & agents (RAG, FAISS/Milvus, tool use/function calling (target))",
-            "Evaluation (factuality, hallucination, bias/safety; golden sets and task-specific harnesses)"
+            "Evaluation (factuality, hallucination, bias/safety)"
           ]
         },
         {
           "name": "Speech & audio",
           "items": [
-            "ASR with Whisper, VAD/diarisation (target)",
+            "ASR with Whisper/WhisperX",
             "Prosodic features (pitch, jitter/shimmer, pause metrics)",
-            "Spectrograms/MFCC, temporal CNNs/transformers (target)"
+            "Spectrograms/MFCC, temporal CNNs/transformers"
           ]
         }
       ]
@@ -358,9 +358,9 @@
         {
           "name": "Orchestration & ELT/ETL",
           "items": [
-            "Airflow, Prefect, Dagster (target)",
-            "dbt (models, tests, exposures) (target)",
-            "Ingestion (Fivetran/Stitch (target), custom Python ETL)"
+            "Prefect",
+            "dbt (models, tests, exposures)(learning)",
+            "Ingestion (Fivetran/Stitch, custom Python ETL)"
           ]
         },
         {
@@ -372,7 +372,7 @@
         {
           "name": "Experiment & model tracking",
           "items": [
-            "MLflow (tracking/registry), Weights & Biases (target), Neptune (target)",
+            "MLflow (tracking/registry), Weights & Biases (target)",
             "Data/versioning (Git/GitHub, DVC (target), OpenLineage (target))"
           ]
         },
@@ -381,7 +381,7 @@
           "items": [
             "Docker, Kubernetes (target), ONNX/TensorRT (target)",
             "REST/gRPC services with FastAPI/uvicorn",
-            "Model servers (TorchServe, TF Serving (target))"
+            "Model servers (TorchServe)"
           ]
         },
         {
@@ -395,30 +395,16 @@
         {
           "name": "Cloud",
           "items": [
-            "GCP, AWS, Azure basics",
-            "Object storage (S3/GCS), serverless, IAM/secrets, VPC/networking (target)",
-            "Managed ML (Vertex AI, SageMaker, Databricks (target))"
+            "GCP, AWS",
+            "Object storage (S3/GCS), IAM/secrets, VPC/networking (target)",
+            "Managed ML (SageMaker)"
           ]
         },
         {
           "name": "BI & visual analytics",
           "items": [
-            "Streamlit, Dash",
-            "Power BI (some), Tableau/Metabase/Superset (target)"
-          ]
-        },
-        {
-          "name": "Governance, privacy & security",
-          "items": [
-            "Model cards/datasheets, lineage/audit trails (target)",
-            "GDPR/HIPAA basics, de-identification/PHI handling",
-            "Secrets management, PII scanning; adversarial robustness (target)"
-          ]
-        },
-        {
-          "name": "Feature stores",
-          "items": [
-            "Feast (target), online/offline consistency"
+            "Streamlit",
+            "Power BI/Tableau (limited)"
           ]
         }
       ]
@@ -431,47 +417,23 @@
         {
           "name": "Biomedical domain knowledge",
           "items": [
-            "Radiology & pathology (modalities (MRI/CT/X-ray/US), PACS/RIS, reporting workflows)",
+            "Radiology & pathology (modalities (MRI/CT/X-ray), PACS/RIS basics)",
             "Oncology & immunology (biomarkers, response criteria; T-lymphocyte dynamics)",
-            "Neuroscience (neuroanatomy basics, fMRI/DTI concepts, EEG/MEG pipelines (MNE))",
-            "Genomics/bioinformatics (FASTA/FASTQ/VCF, Biopython/Bioconductor (target))",
-            "Clinical data (EHR basics, HL7/FHIR, ICD/SNOMED; survival analysis)"
-          ]
-        },
-        {
-          "name": "Causal inference & decision science",
-          "items": [
-            "DAGs/identifiability, IV/matching, DiD/synthetic controls (target)",
-            "Uplift modelling, ITE estimation; EconML/DoWhy (target)"
+            "Neuroscience (neuroanatomy basics, fMRI/DTI concepts, EEG/MEG pipelines)",
+            "Genomics/bioinformatics (FASTA/FASTQ, Biopython/Bioconductor)"
           ]
         },
         {
           "name": "Experimentation practice",
           "items": [
-            "A/B/n platforms, exposure/bucketing, CUPED, SRM detection, guardrails"
-          ]
-        },
-        {
-          "name": "Ethics & responsible AI",
-          "items": [
-            "Fairness/bias audits, subgroup analysis",
-            "Safety/red-teaming, model kill-switches, incident playbooks"
+            "A/B/n platforms, exposure/bucketing"
           ]
         },
         {
           "name": "Research & reproducibility",
           "items": [
-            "Reproducible envs (Conda/Poetry, containers)",
-            "Seeds/config discipline, artifact stores",
-            "Paper-to-product (reimplement, ablate, benchmark, ship)"
-          ]
-        },
-        {
-          "name": "Communication & leadership",
-          "items": [
-            "Technical writing (model cards, experiment memos, clinical-style abstracts)",
-            "Stakeholder comms (executive summaries, uncertainty/risk framing)",
-            "Mentoring, code/design reviews, brown-bags"
+            "Reproducible environments (Conda/Poetry, containers)",
+            "Seeds/config discipline, artifact stores"
           ]
         },
         {
@@ -499,6 +461,11 @@
     {
       "language": "French",
       "fluency": "Fluent (C1-C2 level)",
+      "icon": ""
+    },
+    {
+      "language": "Portuguese",
+      "fluency": "Begginner (A1 level)",
       "icon": ""
     }
   ],

@@ -11,6 +11,11 @@ profile:
   more_info: >
     <p>Paris, France</p>
     <p>stefan.strain@outlook.com</p>
+  languages: >
+    <p>English (Fluent)</p>
+    <p>French (Fluent)</p>
+    <p>Romanian (Native)</p>
+    <p>Portuguese (Básico)</p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: 
@@ -27,9 +32,9 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I see myself as both a Statistician and a Data Scientist—someone who loves to work with the raw materials of mathematics to build tangible solutions for complex problems. My academic journey, especially my Master's in Applied Statistics, was about learning how to shape abstract theory into practical tools, particularly within the intricate world of Biostatistics.
+I see myself as both a Statistician and a Data Scientist, someone who loves to work with the raw materials of mathematics to build tangible solutions for complex problems. My academic journey, especially my Master's in Applied Statistics, was about learning how to shape abstract theory into practical tools, particularly within the intricate world of Biostatistics.
 
-This love for building has taken me through both the financial and medical fields. I've had the chance to construct and refine credit risk models, shaping data into systems that could predict financial outcomes. I've also shifted my focus to the intricate world of medical data, building a machine learning model from the ground up to help predict dementia progression using neuroimaging and clinical records. For me, these experiences are about more than just analysis; they're about using data to create things that can advance research and improve lives.
+This love for building has taken me through both the financial and medical fields. I've had the chance to construct and refine credit risk models, shaping data into systems that could predict financial outcomes. I've also shifted my focus to the intricate world of medical data, building a machine learning model from the ground up to help predict dementia progression using neuroimaging and clinical records. For me, these experiences are about more than just analysis, they're about using data to create things that can advance research and improve lives.
 
 I enjoy the entire creative process, from sketching out ideas in Python or R to building robust pipelines that bring those ideas to life. I'm driven by a tinkerer's curiosity, equally fascinated by the deep theory behind a model and the practical challenge of making it work reliably in the real world. For a detailed look at the specific tools and technologies I use, please see my CV.
 
