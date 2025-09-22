@@ -178,6 +178,7 @@
           "items": [
             "Multivariate calculus, Taylor expansions",
             "Real/measure-theoretic basics (limits, convergence)",
+            "||",
             "Functional analysis (Hilbert spaces, RKHS) (target)"
           ]
         },
@@ -185,6 +186,7 @@
           "name": "Probability",
           "items": [
             "Random variables, expectations, LLN/CLT",
+            "||",
             "Stochastic processes (Markov chains, Gaussian Processes) (target)"
           ]
         },
@@ -214,6 +216,7 @@
           "name": "Bayesian statistics",
           "items": [
             "Priors/posteriors, conjugacy",
+            "||",
             "Computation (MCMC (HMC/NUTS), VI, ABC) (target)",
             "Hierarchical models, shrinkage"
           ]
@@ -251,8 +254,11 @@
           "name": "Supervised learning",
           "items": [
             "Linear & logistic regression, GLMs",
+            "||",
             "Trees and ensembles (Decision Trees, Random Forests, XGBoost, LightGBM)",
+            "||",
             "SVMs, k-NN, Naïve Bayes",
+            "||",
             "Regularisation (L1/L2/elastic net, group/fused lasso (target))"
           ]
         },
@@ -276,6 +282,7 @@
           "items": [
             "Cross-validation, nested CV",
             "Thresholding and cost curves, calibration (Platt/Isotonic)",
+            "||",
             "Imbalance tactics (resampling, class weights, focal loss proxy)"
           ]
         },
@@ -284,7 +291,9 @@
           "items": [
             "Semi/weak supervision, active learning",
             "Anomaly/one-class detection",
+            "||",
             "Causal inference basics (DAGs, back-/front-door, IV, matching (target))",
+            "||",
             "Experimentation (A/B/n, CUPED, sequential tests, power)"
           ]
         }
@@ -300,6 +309,7 @@
           "items": [
             "Backprop, inits, norms, regularisation, data augmentation",
             "Optimisers (SGD, Adam, schedulers)",
+            "||",
             "Mixed precision (AMP), distributed training (DDP), reproducibility"
           ]
         },
@@ -307,7 +317,9 @@
           "name": "Architectures",
           "items": [
             "MLPs, CNNs (2D/3D), RNN/LSTM/GRU",
+            "||",
             "Transformers (BERT-style, ViT/SwIN)",
+            "||",
             "Autoencoders/VAEs, diffusion models, GANs"
           ]
         },
@@ -315,11 +327,17 @@
           "name": "Computer vision (general & medical)",
           "items": [
             "Preprocessing (filtering, morphology, bias-field correction)",
+            "||",
             "Tasks (classification, detection, segmentation)",
+            "||",
             "Medical segmentation (U-Net, nnU-Net, 3D CNNs)",
+            "||",
             "Registration, multi-modal fusion",
+            "||",
             "Tooling (OpenCV, MONAI, TorchIO, SimpleITK/ITK)",
+            "||",
             "Formats (DICOM, NIfTI, pydicom, NiBabel)",
+            "||",
             "Robustness (domain shift, TTA, uncertainty)"
           ]
         },
@@ -327,8 +345,11 @@
           "name": "NLP & LLMs",
           "items": [
             "Classical (tokenisation, TF-IDF, topic models, NER basics)",
+            "||",
             "Transformers (BERT fine-tuning, instruction tuning )",
+            "||",
             "Retrieval & agents (RAG, FAISS/Milvus, tool use/function calling (target))",
+            "||",
             "Evaluation (factuality, hallucination, bias/safety)"
           ]
         },
@@ -351,7 +372,9 @@
           "name": "Storage & warehousing",
           "items": [
             "Relational DBs (PostgreSQL/MySQL/SQLite)",
+            "||",
             "Cloud warehouses (BigQuery, Snowflake)",
+            "||",
             "Formats (CSV/Parquet, JSON, HDF5, Zarr)"
           ]
         },
@@ -360,6 +383,7 @@
           "items": [
             "Prefect",
             "dbt (models, tests, exposures)(learning)",
+            "||",
             "Ingestion (Fivetran/Stitch, custom Python ETL)"
           ]
         },
@@ -373,6 +397,7 @@
           "name": "Experiment & model tracking",
           "items": [
             "MLflow (tracking/registry), Weights & Biases (target)",
+            "||",
             "Data/versioning (Git/GitHub, DVC (target), OpenLineage (target))"
           ]
         },
@@ -389,6 +414,7 @@
           "items": [
             "Prometheus/Grafana (target)",
             "Drift/outlier detection, feature health, performance SLOs",
+            "||",
             "Data quality (Great Expectations, Soda (target))"
           ]
         },
@@ -418,8 +444,11 @@
           "name": "Biomedical domain knowledge",
           "items": [
             "Radiology & pathology (modalities (MRI/CT/X-ray), PACS/RIS basics)",
+            "||",
             "Oncology & immunology (biomarkers, response criteria; T-lymphocyte dynamics)",
+            "||",
             "Neuroscience (neuroanatomy basics, fMRI/DTI concepts, EEG/MEG pipelines)",
+            "||",
             "Genomics/bioinformatics (FASTA/FASTQ, Biopython/Bioconductor)"
           ]
         },
