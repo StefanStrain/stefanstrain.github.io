@@ -388,25 +388,17 @@
           ]
         },
         {
-          "name": "Distributed & streaming",
-          "items": [
-            "Spark/Dask, Kafka/Pulsar (target), Flink (target)"
-          ]
-        },
-        {
           "name": "Experiment & model tracking",
           "items": [
-            "MLflow (tracking/registry), Weights & Biases (target)",
-            "||",
-            "Data/versioning (Git/GitHub, DVC (target), OpenLineage (target))"
+            "MLflow (tracking/registry)", "AWS Sagemaker Experiments",
+            "Data/versioning (Git/GitHub)"
           ]
         },
         {
           "name": "Serving & deployment",
           "items": [
-            "Docker, Kubernetes (target), ONNX/TensorRT (target)",
-            "REST/gRPC services with FastAPI/uvicorn",
-            "Model servers (TorchServe)"
+            "Docker, Kubernetes",
+            "Model servers (AWS Sagemaker, FastAPI)"
           ]
         },
         {
@@ -429,7 +421,7 @@
         {
           "name": "BI & visual analytics",
           "items": [
-            "Streamlit",
+            "Streamlit (UI)",
             "Power BI/Tableau (limited)"
           ]
         }
@@ -445,7 +437,7 @@
           "items": [
             "Radiology & pathology (modalities (MRI/CT/X-ray), PACS/RIS basics)",
             "||",
-            "Oncology & immunology (biomarkers, response criteria; T-lymphocyte dynamics)",
+            "Oncology & immunology (biomarkers, response criteria, T-lymphocyte dynamics)",
             "||",
             "Neuroscience (neuroanatomy basics, fMRI/DTI concepts, EEG/MEG pipelines)",
             "||",
@@ -453,20 +445,15 @@
           ]
         },
         {
-          "name": "Experimentation practice",
+          "name": "Scientific research",
           "items": [
-            "A/B/n platforms, exposure/bucketing"
+            "Literature review, paper writing, reproducible research",
+            "||",
+            "Statistical consulting, collaboration with domain experts"
           ]
         },
         {
-          "name": "Research & reproducibility",
-          "items": [
-            "Reproducible environments (Conda/Poetry, containers)",
-            "Seeds/config discipline, artifact stores"
-          ]
-        },
-        {
-          "name": "Product analytics (bonus)",
+          "name": "Product analytics",
           "items": [
             "Metric trees, event schemas, data dictionaries",
             "Funnels, cohorts/retention, growth accounting, churn/LTV",
@@ -503,19 +490,19 @@
       "name": "Creative Hobbies",
       "icon": "fa-solid fa-palette",
       "keywords": [
-        "Sculpting (Paper, Wax, Metal, Clay)",
-        "Tinkering with Electronics (Arduino)",
-        "Repairing Electronics"
+        "Sculpting (Metal, Clay, Polymer)",
+        "Carving (Wood, Books, Wax)",
+        "Engraving (Glass, Metal)",
+        "Tinkering with Electronics (Arduino)"
       ]
     },
     {
       "name": "Reading",
       "icon": "fa-solid fa-book",
       "keywords": [
-        "Behavioral Sciences",
-        "Neuroscience",
-        "Behavioral Economics (Daniel Kahneman)",
-        "Neuroplasticity (Norman Doidge)"
+        "Behavioral Sciences and Psychology",
+        "Neuroscience and Biology",
+        "Fiction (Sci-Fi, Fantasy, Mystery)"
       ]
     }
   ],
@@ -536,13 +523,14 @@
     },
     {
       "organization": "Gazamo Inc.",
-      "position": "Project Manager / Producer",
+      "position": "Lead Artist & Project Manager / Producer",
       "startDate": "2018-01-01",
       "endDate": "2022-01-01",
-      "summary": "Managed a remote, international team of artists in the creation of digital assets for video games.",
+      "summary": "Served as both a practicing artist and manager of a remote, international team of artists in the creation of digital assets for video games.",
       "highlights": [
+        "Created digital art assets while simultaneously managing and mentoring other artists, bringing unique insight to both creative direction and management.",
         "Developed project plans, defined scopes and objectives, and managed timelines to ensure milestones were met.",
-        "Oversaw the artistic and production pipeline, contributing to both management and creative tasks."
+        "Oversaw the artistic and production pipeline, contributing both artistic content and management oversight to maintain quality and consistency."
       ]
     }
   ],
