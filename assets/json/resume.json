@@ -202,7 +202,11 @@
           "items": [
             "Estimation and testing (MLE/MAP, likelihood theory)",
             "Decision theory, sufficiency/ancillarity, information",
-            "Multiple testing, FDR control"
+            "Multiple testing, FDR control",
+            "Experimental design (blocking, factorial)",
+            "Missing data (MCAR/MAR/MNAR), multiple imputation (MICE)",
+            "Robust statistics (Huber loss, HC standard errors)",
+            "Nonparametrics (rank tests, kernel density/regression)"
           ]
         },
         {
@@ -224,14 +228,16 @@
         {
           "name": "Regression & multivariate methods",
           "items": [
-            "GLMs, GAMs, mixed effects",
-            "PCA/PPCA, FA, ICA, manifold learning"
+            "GLMs, GAMs, mixed effects (GLMM), GEE",
+            "PCA/PPCA, FA, ICA, manifold learning, MANOVA",
+            "Diagnostics (residuals, influence, heteroskedasticity)"
           ]
         },
         {
           "name": "Time series",
           "items": [
             "Stationarity, ARIMA/ETS",
+            "SARIMA (seasonal ARIMA)",
             "VAR/state-space, Kalman/particle filters (target)",
             "Spectral analysis, wavelets"
           ]
@@ -273,6 +279,7 @@
         {
           "name": "Feature engineering & leakage control",
           "items": [
+            "EDA/profiling",
             "Target/impact encoding, binning, interaction features",
             "Temporal CV, leakage hunts, data contracts"
           ]
@@ -282,6 +289,7 @@
           "items": [
             "Cross-validation, nested CV",
             "Thresholding and cost curves, calibration (Platt/Isotonic)",
+            "Probability metrics (Brier score, ECE)",
             "||",
             "Imbalance tactics (resampling, class weights, focal loss proxy)"
           ]
@@ -338,7 +346,9 @@
             "||",
             "Formats (DICOM, NIfTI, pydicom, NiBabel)",
             "||",
-            "Robustness (domain shift, TTA, uncertainty)"
+            "Robustness (domain shift, TTA, uncertainty)",
+            "||",
+            "Metrics (Dice, IoU, Hausdorff, NSD)"
           ]
         },
         {
