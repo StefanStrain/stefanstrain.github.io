@@ -133,10 +133,16 @@
             "ML/DL (scikit-learn, PyTorch, TensorFlow, Transformers)",
             "||",
             "Data apps & APIs (Streamlit, Dash, FastAPI, Flask, Pydantic)",
+            "||",
             "Probabilistic & stats (statsmodels, PyMC, pyro/numpyro)",
+            "||",
             "Packaging & quality (Poetry, hatch, black, mypy, pytest)",
+            "||",
             "Dev environments (JupyterLab, Jupyter Notebook, VS Code)",
-            "Big data (PySpark DataFrames/Spark SQL basics)"
+            "||",
+            "Big data (PySpark DataFrames/Spark SQL basics)",
+            "||",
+            "Packaging & quality (Poetry, hatch, black, mypy, pytest)"
           ]
         },
         {
@@ -179,6 +185,7 @@
           "items": [
             "Multivariate calculus, Taylor expansions",
             "Real/measure-theoretic basics (limits, convergence)",
+            "||",
             "Functional analysis (Hilbert spaces, RKHS)"
           ]
         },
@@ -186,6 +193,7 @@
           "name": "Probability",
           "items": [
             "Random variables, expectations, LLN/CLT",
+            "||",
             "Stochastic processes (Markov chains, Gaussian Processes)"
           ]
         },
@@ -219,6 +227,7 @@
           "name": "Bayesian statistics",
           "items": [
             "Priors/posteriors, conjugacy",
+            "||",
             "Computation (MCMC (HMC/NUTS), VI, ABC)",
             "Hierarchical models, shrinkage"
           ]
@@ -289,9 +298,7 @@
             "Thresholding and cost curves, calibration (Platt/Isotonic)",
             "Probability metrics (Brier score, ECE)",
             "||",
-            "Imbalance tactics (resampling, class weights, focal loss proxy)",
-            "||",
-            "Interpretability (permutation importance, SHAP, partial dependence)"
+            "Imbalance tactics (resampling, class weights, focal loss proxy)"
           ]
         },
         {
@@ -302,17 +309,9 @@
             "||",
             "Causal inference basics (DAGs, back-/front-door, IV, matching)",
             "||",
-            "Experimentation (A/B/n, CUPED, sequential tests, power)"
-          ]
-        },
-        {
-          "name": "Applied business use cases",
-          "items": [
-            "Churn prediction, lead scoring",
-            "Demand & time-series forecasting",
-            "Recommendation systems (collaborative & content-based)",
-            "Marketing response/uplift modelling, customer segmentation",
-            "Customer lifetime value (CLV/LTV) modelling"
+            "Experimentation (A/B/n, CUPED, sequential tests, power)",
+            "||",
+            "Interpretability (permutation importance, SHAP, partial dependence)"
           ]
         }
       ]
@@ -395,34 +394,23 @@
             "||",
             "Cloud warehouses (BigQuery, Snowflake)",
             "||",
-            "Formats (CSV/Parquet, JSON, HDF5, Zarr)",
-            "Dimensional modelling (facts/dimensions, star schemas)"
+            "Formats (CSV/Parquet, JSON, HDF5, Zarr)"
           ]
         },
         {
           "name": "Orchestration & ELT/ETL",
           "items": [
             "Prefect",
-            "Airflow (basics)",
             "dbt (models, tests, exposures)",
             "||",
             "Ingestion (Fivetran/Stitch, custom Python ETL)"
           ]
         },
         {
-          "name": "Big data & distributed compute",
-          "items": [
-            "PySpark / Spark (DataFrames, Spark SQL, basic Spark ML)",
-            "Scaling data processing and model training on large datasets"
-          ]
-        },
-        {
           "name": "Experiment & model tracking",
           "items": [
-            "MLflow (tracking/registry)",
-            "AWS Sagemaker Experiments",
-            "Git & Version Control (Git/GitHub)",
-            "Model registry & deployment workflows (champion/challenger)"
+            "MLflow (tracking/registry)", "AWS Sagemaker Experiments",
+            "Data/versioning (Git/GitHub)"
           ]
         },
         {
@@ -435,22 +423,12 @@
           ]
         },
         {
-          "name": "CI/CD & DevOps",
-          "items": [
-            "CI/CD (GitHub Actions/GitLab CI, basic Jenkins)",
-            "Automated testing, build and deployment pipelines for ML services",
-            "Container registries and image management"
-          ]
-        },
-        {
           "name": "Monitoring & observability",
           "items": [
-            "Prometheus/Grafana",
+            "Prometheus/Grafana basics",
             "Drift/outlier detection, feature health, performance SLOs",
             "||",
-            "Data quality (Great Expectations, Soda)",
-            "||",
-            "Application logging & tracing (structured logs, correlation IDs)"
+            "Data quality (Great Expectations, Soda basics)"
           ]
         },
         {
@@ -501,18 +479,7 @@
           "items": [
             "Metric trees, event schemas, data dictionaries",
             "Funnels, cohorts/retention, growth accounting, churn/LTV",
-            "Revenue, margin, unit economics, CAC/LTV",
             "Experiment design at product scale"
-          ]
-        },
-        {
-          "name": "Business communication & storytelling",
-          "items": [
-            "Data storytelling (problem → insight → recommendation → impact)",
-            "Slide-writing and visual communication for non-technical audiences",
-            "Stakeholder communication & expectation management",
-            "Translating business questions into data & ML projects",
-            "Prioritisation and scoping based on business impact"
           ]
         }
       ]
