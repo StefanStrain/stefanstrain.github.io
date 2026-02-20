@@ -9,10 +9,28 @@
         <i class="{{ entry.icon }}"></i>
       {% endif %}
       <strong>
-        {{- entry.name -}}
+        <span style="color: var(--global-theme-color);">{{- entry.name -}}</span>
         {%- if entry.level %} ({{ entry.level }}){% endif %}:</strong
       >
-      {% if entry.keywords %}
+      
+      {% comment %} Render subSkills if they exist {% endcomment %}
+      {% if entry.subSkills and entry.subSkills.size > 0 %}
+        <ul style="margin: 0.5rem 0; margin-left: 1.5rem; list-style: none;">
+          {% for subskill in entry.subSkills %}
+            <li style="margin-bottom: 0.5rem;">
+              <strong><span style="color: var(--global-theme-color);">{{ subskill.name }}</span></strong>
+              {% if subskill.items and subskill.items.size > 0 %}
+                <ul style="margin: 0.25rem 0 0 0; margin-left: 1.5rem; list-style: disc;">
+                  {% for item in subskill.items %}
+                    <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% elsif entry.keywords %}
+        {% comment %} Fallback for keyword-based skills (old format) {% endcomment %}
         {% for keyword in entry.keywords %}
           {% if forloop.last %}
             {{ keyword }}
@@ -28,5 +46,13 @@
 <style>
   .skill-item {
     padding: 0.5rem 0;
+  }
+  
+  .skill-item ul {
+    padding-left: 1.5rem;
+  }
+  
+  .skill-item li {
+    margin-bottom: 0.5rem;
   }
 </style>

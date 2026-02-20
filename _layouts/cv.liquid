@@ -17,7 +17,25 @@ layout: default
   <header class="post-header">
     <h1 class="post-title">
       {{ page.title }}
-      {% if page.cv_pdf %}
+      {% if page.cv_pdfs %}
+        <span class="float-right">
+          {% for pdf in page.cv_pdfs %}
+            {% assign pdf_href = pdf.url | default: pdf.file %}
+            <a
+              {% if pdf_href contains '://' %}
+                href="{{ pdf_href }}"
+              {% else %}
+                href="{{ pdf_href | relative_url }}"
+              {% endif %}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline-primary btn-sm ml-2"
+            >
+              <i class="fa-solid fa-file-pdf"></i> {{ pdf.label }}
+            </a>
+          {% endfor %}
+        </span>
+      {% elsif page.cv_pdf %}
         <a
           {% if page.cv_pdf contains '://' %}
             href="{{ page.cv_pdf }}"
@@ -33,7 +51,9 @@ layout: default
       {% endif %}
     </h1>
     {% if page.description %}
-      <p class="post-description">{{ page.description }}</p>
+      <div class="cv-notice alert alert-info" role="alert">
+        <p class="mb-0">{{ page.description }}</p>
+      </div>
     {% endif %}
   </header>
 
@@ -199,10 +219,10 @@ layout: default
       {% elsif render_jsonresume and site.data.resume %}
         {% comment %} JSONResume format {% endcomment %}
 
-        <!-- Contact Information -->
+        <!-- About -->
         {% if site.data.resume.basics %}
           <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Contact Information</h3>
+            <h3 class="card-title font-weight-medium">About</h3>
             {% assign basics = site.data.resume.basics %}
             <table class="table table-cv table-sm table-borderless">
               {% if basics.name %}
@@ -213,64 +233,61 @@ layout: default
               {% endif %}
               {% if basics.label %}
                 <tr>
-                  <td class="p-1 pr-2 font-weight-bold"><b>Professional Title</b></td>
+                  <td class="p-1 pr-2 font-weight-bold"><b>Title</b></td>
                   <td class="p-1 pl-2 font-weight-light">{{ basics.label }}</td>
                 </tr>
               {% endif %}
               {% if basics.email %}
                 <tr>
                   <td class="p-1 pr-2 font-weight-bold"><b>Email</b></td>
-                  <td class="p-1 pl-2 font-weight-light">{{ basics.email }}</td>
+                  <td class="p-1 pl-2 font-weight-light">
+                    <a href="mailto:{{ basics.email }}">{{ basics.email }}</a>
+                  </td>
                 </tr>
               {% endif %}
               {% if basics.phone %}
                 <tr>
                   <td class="p-1 pr-2 font-weight-bold"><b>Phone</b></td>
-                  <td class="p-1 pl-2 font-weight-light">{{ basics.phone }}</td>
+                  <td class="p-1 pl-2 font-weight-light">
+                    <a href="tel:{{ basics.phone | replace: ' ', '' }}">{{ basics.phone }}</a>
+                  </td>
                 </tr>
               {% endif %}
               {% if basics.location %}
                 <tr>
                   <td class="p-1 pr-2 font-weight-bold"><b>Location</b></td>
                   <td class="p-1 pl-2 font-weight-light">
-                    {% if basics.location.address %}{{ basics.location.address }}, {% endif %}
-                    {% if basics.location.city %}{{ basics.location.city }}, {% endif %}
-                    {% if basics.location.region %}{{ basics.location.region }} {% endif %}
-                    {% if basics.location.postalCode %}{{ basics.location.postalCode }}{% endif %}
+                    {%- if basics.location.city %}{{ basics.location.city }}{% endif -%}
+                    {%- if basics.location.region %}, {{ basics.location.region }}{% endif -%}
+                    {%- if basics.location.postalCode %} {{ basics.location.postalCode }}{% endif -%}
                   </td>
                 </tr>
               {% endif %}
-              {% if basics.url %}
+              {% if site.data.resume.projects.size > 0 %}
                 <tr>
-                  <td class="p-1 pr-2 font-weight-bold"><b>Website</b></td>
+                  <td class="p-1 pr-2 font-weight-bold"><b>Portfolio</b></td>
                   <td class="p-1 pl-2 font-weight-light">
-                    <a href="{{ basics.url }}" target="_blank">{{ basics.url }}</a>
+                    <a href="#projects">View Projects</a>
                   </td>
                 </tr>
               {% endif %}
             </table>
+            {% if basics.summary %}
+              <hr class="my-3">
+              <h5 class="card-subtitle font-weight-medium mb-2">Summary</h5>
+              <p class="card-text font-weight-light">{{ basics.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+            {% endif %}
           </div>
         {% endif %}
 
-        <!-- Summary -->
-        {% if site.data.resume.basics.summary %}
-          <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Professional Summary</h3>
-            <p>{{ site.data.resume.basics.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
-          </div>
-        {% endif %}
-
-        <!-- JSONResume Sections - Merge work and volunteer into Experience -->
-        {% assign empty_array = '' | split: ',' %}
+        <!-- JSONResume Work Experience -->
         {% assign work = site.data.resume.work | default: empty_array %}
-        {% assign vol = site.data.resume.volunteer | default: empty_array %}
-        {% assign combined_experience = work | concat: vol %}
-        {% if combined_experience.size > 0 %}
+        {% if work.size > 0 %}
           <a class="anchor" id="experience"></a>
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Experience</h3>
             <div>
-              {% assign entries = combined_experience %}
+              {% assign entries = work %}
               {% include cv/experience.liquid %}
             </div>
           </div>
@@ -288,26 +305,14 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Awards -->
-        {% if site.data.resume.awards.size > 0 %}
-          <a class="anchor" id="awards"></a>
+        <!-- Projects -->
+        {% if site.data.resume.projects.size > 0 %}
+          <a class="anchor" id="projects"></a>
           <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Awards</h3>
+            <h3 class="card-title font-weight-medium">Projects</h3>
             <div>
-              {% assign entries = site.data.resume.awards %}
-              {% include cv/awards.liquid %}
-            </div>
-          </div>
-        {% endif %}
-
-        <!-- Publications -->
-        {% if site.data.resume.publications.size > 0 %}
-          <a class="anchor" id="publications"></a>
-          <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Publications</h3>
-            <div>
-              {% assign entries = site.data.resume.publications %}
-              {% include cv/publications.liquid %}
+              {% assign entries = site.data.resume.projects %}
+              {% include cv/projects.liquid %}
             </div>
           </div>
         {% endif %}
@@ -348,38 +353,15 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Certificates -->
-        {% if site.data.resume.certificates.size > 0 %}
-          <a class="anchor" id="certificates"></a>
+        <!-- JSONResume Volunteer -->
+        {% assign vol = site.data.resume.volunteer | default: empty_array %}
+        {% if vol.size > 0 %}
+          <a class="anchor" id="volunteer"></a>
           <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Certificates</h3>
+            <h3 class="card-title font-weight-medium">Volunteer</h3>
             <div>
-              {% assign entries = site.data.resume.certificates %}
-              {% include cv/certificates.liquid %}
-            </div>
-          </div>
-        {% endif %}
-
-        <!-- Projects -->
-        {% if site.data.resume.projects.size > 0 %}
-          <a class="anchor" id="projects"></a>
-          <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Projects</h3>
-            <div>
-              {% assign entries = site.data.resume.projects %}
-              {% include cv/projects.liquid %}
-            </div>
-          </div>
-        {% endif %}
-
-        <!-- References -->
-        {% if site.data.resume.references.size > 0 %}
-          <a class="anchor" id="references"></a>
-          <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">References</h3>
-            <div>
-              {% assign entries = site.data.resume.references %}
-              {% include cv/references.liquid %}
+              {% assign entries = vol %}
+              {% include cv/experience.liquid %}
             </div>
           </div>
         {% endif %}
@@ -390,3 +372,33 @@ layout: default
     </div>
   </article>
 </div>
+
+<style>
+  .cv-notice {
+    background-color: #d1ecf1;
+    border-left: 4px solid var(--global-theme-color);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .cv-notice p {
+    color: var(--global-theme-color);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  
+  .cv-notice strong {
+    font-weight: 800;
+  }
+  
+  /* Dark mode support */
+  html[data-theme='dark'] .cv-notice {
+    background-color: #1a2332;
+    border-left-color: var(--global-theme-color);
+  }
+  
+  html[data-theme='dark'] .cv-notice p {
+    color: var(--global-theme-color);
+  }
+</style>

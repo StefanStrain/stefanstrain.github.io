@@ -3,7 +3,7 @@ layout: page
 permalink: /repositories/
 title: repositories
 description: "This is a new space where I'll be sharing my projects. I'm actively working on adding more of my work, so please check back soon for updates."
-nav: true
+nav: false
 nav_order: 4
 ---
 

@@ -4,8 +4,13 @@ permalink: /cv/
 title: cv
 nav: true
 nav_order: 5
-cv_pdf: CV_EN_Stefan_Strainovic.pdf # you can also use external links here
-description: This is a more detailed Curriculum Vitae representing my skills and experiences in more depth, for a quick read please consult the downloadable pdf version to the right. 
+cv_format: jsonresume
+cv_pdfs:
+  - label: English CV
+    file: /assets/pdf/CV-EN.pdf
+  - label: French CV
+    file: /assets/pdf/CV-FR.pdf
+description: <strong>📄 Note:</strong> This online CV is significantly more detailed than the standard resume format. For a concise single-page version please download the <strong>English or French PDF above</strong>. 
 toc:
   sidebar: left
 ---

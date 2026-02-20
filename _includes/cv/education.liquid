@@ -19,9 +19,8 @@
 
           {% if start_date != '' %}
             {% comment %} Extract year only from dates like "1933-01-01" or just use "1933" as is {% endcomment %}
-            {% assign startDate = start_date | split: '-' | first %}
             {% assign endDate = end_date | split: '-' | first | default: 'Present' %}
-            {% assign date = startDate | append: ' - ' | append: endDate %}
+            {% assign date = endDate %}
           {% else %}
             {% assign date = null %}
           {% endif %}
@@ -56,20 +55,25 @@
             {% if entry.studyType %}{{ entry.studyType }}{% elsif entry.degree %}{{ entry.degree }}{% endif %}
           {% endcapture %}
 
+          {% capture area %}
+            {% if entry.area %}{{ entry.area }}{% endif %}
+          {% endcapture %}
+
+          {% assign title = study_type %}
+          {% if area != '' %}
+            {% assign title = study_type | append: ' in ' | append: area %}
+          {% endif %}
+
           {% if entry.url %}
             <h6 class="title font-weight-bold ml-1 ml-md-4">
-              <a href="{{ entry.url }}">{{ study_type }}</a>
+              <a href="{{ entry.url }}">{{ title }}</a>
             </h6>
-          {% elsif study_type != '' %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">{{ study_type }}</h6>
+          {% elsif title != '' %}
+            <h6 class="title font-weight-bold ml-1 ml-md-4">{{ title }}</h6>
           {% endif %}
 
           {% if entry.institution %}
             <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">{{ entry.institution }}</h6>
-          {% endif %}
-
-          {% if entry.area %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem; font-style: italic">{{ entry.area }}</h6>
           {% endif %}
 
           {% if entry.courses or entry.highlights %}
