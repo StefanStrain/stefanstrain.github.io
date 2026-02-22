@@ -516,14 +516,9 @@ ninja.data = [{
               window.location.href = "/projects/9_project/";
             },},{id: "projects-brain-tumor-classifier",
           title: 'Brain Tumor Classifier',
-          description: "In development",
+          description: "Coming Soon",
           section: "Projects",handler: () => {
               window.location.href = "/projects/mri_classifier/";
-            },},{id: "projects-ai-public-speaking-coach",
-          title: 'AI public speaking coach',
-          description: "in development",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/public_speaking/";
             },},{
         id: 'social-email',
         title: 'email',
