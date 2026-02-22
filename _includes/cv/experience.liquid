@@ -79,7 +79,7 @@
             <ul class="items">
               {% for item in entry.highlights %}
                 <li>
-                  <span class="item" style="color: var(--global-theme-color);">{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</span>
+                  <span class="item">{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</span>
                 </li>
               {% endfor %}
             </ul>
