@@ -17,8 +17,8 @@
     "profiles": [
       {
         "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "username": "asd",
+        "url": "asd"
       }
     ]
   },
@@ -142,11 +142,10 @@
             "<strong>Scientific computing:</strong> NumPy, pandas, SciPy, polars",
             "<strong>Data visualization:</strong> matplotlib, seaborn, plotly, Altair",
             "<strong>Machine learning & deep learning:</strong> scikit-learn, PyTorch, TensorFlow, Transformers",
-            "<strong>Data applications & APIs:</strong> Streamlit, Dash, FastAPI, Flask, Pydantic",
-            "<strong>Probabilistic programming & statistics:</strong> statsmodels, PyMC, pyro/numpyro",
-            "<strong>Development quality:</strong> Poetry, hatch, black, mypy, pytest",
-            "<strong>Environments:</strong> JupyterLab, Jupyter Notebook, VS Code",
-            "<strong>Big data:</strong> PySpark DataFrames, Spark SQL basics"
+            "<strong>Data applications & APIs:</strong> Streamlit, FastAPI, Pydantic",
+            "<strong>Probabilistic programming & statistics:</strong> statsmodels",
+            "<strong>Development quality:</strong> pytest, black",
+            "<strong>Environments:</strong> JupyterLab, Jupyter Notebook, VS Code"
           ]
         },
         {
@@ -167,7 +166,7 @@
         {
           "name": "Shell & Scripting",
           "items": [
-            "Bash/zsh, GNU coreutils, Makefiles, cron, tmux"
+            "Bash/zsh"
           ]
         }
       ]
@@ -183,27 +182,28 @@
             "<strong>Supervised learning:</strong> Linear/logistic regression, trees, ensembles (RF, XGBoost, LightGBM), SVMs, k-NN",
             "<strong>Unsupervised learning:</strong> k-means, DBSCAN, PCA, t-SNE/UMAP, mixture models",
             "<strong>Feature engineering:</strong> EDA, encoding, interaction features, temporal CV",
-            "<strong>Leakage control:</strong> Data contracts, leakage detection, validation strategies",
+            "<strong>Leakage control:</strong> Validation strategies",
             "<strong>Evaluation:</strong> Cross-validation, calibration, handling class imbalance"
           ]
         },
         {
           "name": "Deep Learning",
           "items": [
-            "<strong>Fundamentals:</strong> Backpropagation, initialization, optimizers (SGD, Adam), mixed precision, distributed training",
-            "<strong>Architectures:</strong> MLPs, CNNs (2D/3D), RNNs/LSTMs, Transformers, VAEs, GANs",
-            "<strong>Computer Vision:</strong> Image classification, object detection, segmentation",
+            "<strong>Fundamentals:</strong> Backpropagation, initialization, optimizers (SGD, Adam), mixed precision, attention mechanisms",
+            "<strong>Architectures:</strong> MLPs, CNNs (2D/3D), RNNs/LSTMs, Transformers, encoder-decoder architectures",
+            "<strong>Computer Vision:</strong> Image classification, object detection, segmentation, data augmentation, OCR/document parsing",
+            "<strong>CV libraries:</strong> OpenCV, PIL",
+            "<strong>Transfer learning:</strong> Pre-trained models, model fine-tuning",
             "<strong>Medical imaging:</strong> U-Net, nnU-Net, 3D CNNs, DICOM/NIfTI formats, MONAI toolkit",
-            "<strong>Robustness:</strong> Domain adaptation, test-time augmentation, uncertainty quantification"
+            "<strong>Robustness:</strong> Domain adaptation, test-time augmentation"
           ]
         },
         {
           "name": "NLP & Large Language Models",
           "items": [
-            "<strong>Classical NLP:</strong> Tokenization, TF-IDF, topic modeling, NER",
+            "<strong>Classical NLP:</strong> Tokenization, TF-IDF, embeddings, sentiment analysis, NER",
             "<strong>Transformers:</strong> BERT fine-tuning, instruction tuning, prompt engineering",
-            "<strong>Advanced:</strong> Retrieval-augmented generation (RAG), semantic search, function calling",
-            "<strong>Evaluation:</strong> Factuality checking, hallucination detection, bias/safety"
+            "<strong>Advanced:</strong> Retrieval-augmented generation (RAG)"
           ]
         },
         {
@@ -211,16 +211,18 @@
           "items": [
             "<strong>Speech recognition:</strong> Whisper, WhisperX, ASR pipelines",
             "<strong>Acoustic features:</strong> Prosody (pitch, duration), jitter/shimmer, pause metrics",
-            "<strong>Spectral analysis:</strong> Spectrograms, MFCC, temporal CNNs/Transformers"
+            "<strong>Spectral analysis:</strong> Spectrograms, MFCC, temporal CNNs/Transformers",
+            "<strong>Audio libraries:</strong> librosa"
           ]
         },
         {
           "name": "Advanced Topics",
           "items": [
-            "<strong>Causal inference:</strong> DAGs, backdoor/frontdoor adjustment, propensity matching",
-            "<strong>Experimentation:</strong> A/B/n testing, CUPED, sequential testing, power analysis",
-            "<strong>Interpretability:</strong> Permutation importance, SHAP, partial dependence plots",
-            "<strong>Anomaly detection & semi-supervised learning</strong>"
+            "<strong>Causal inference:</strong> DAGs, propensity matching",
+            "<strong>Experimentation:</strong> A/B/n testing, power analysis",
+            "<strong>Interpretability:</strong> Permutation importance, SHAP",
+            "<strong>Multimodal learning:</strong> Audio-text fusion, ensemble deep learning",
+            "<strong>Anomaly detection</strong>"
           ]
         }
       ]
@@ -234,49 +236,37 @@
           "name": "Databases & Warehousing",
           "items": [
             "<strong>Relational:</strong> PostgreSQL, MySQL, SQLite",
-            "<strong>Cloud warehouses:</strong> BigQuery, Snowflake",
             "<strong>Data formats:</strong> Parquet, CSV, JSON, HDF5, Zarr"
           ]
         },
         {
           "name": "Orchestration & ETL",
           "items": [
-            "<strong>Workflow orchestration:</strong> Prefect",
-            "<strong>Data transformation:</strong> dbt (models, tests, exposures)",
-            "<strong>Data ingestion:</strong> Fivetran, Stitch, custom Python pipelines"
+            "<strong>Data transformation:</strong> dbt (models, tests, exposures)"
           ]
         },
         {
           "name": "Model Tracking & Deployment",
           "items": [
             "<strong>Experiment tracking:</strong> MLflow, AWS SageMaker Experiments",
-            "<strong>Version control:</strong> Git, DVC basics",
+            "<strong>Version control:</strong> Git",
             "<strong>Containerization:</strong> Docker, Kubernetes",
-            "<strong>Model serving:</strong> FastAPI, AWS SageMaker, batch/real-time scoring"
-          ]
-        },
-        {
-          "name": "Monitoring & Observability",
-          "items": [
-            "<strong>Metrics & alerting:</strong> Prometheus, Grafana",
-            "<strong>Model monitoring:</strong> Data drift detection, feature health, performance SLOs",
-            "<strong>Data quality:</strong> Great Expectations, Soda"
+            "<strong>CI/CD:</strong> Continuous integration/deployment pipelines",
+            "<strong>Model serving:</strong> FastAPI, AWS SageMaker",
+            "<strong>Model monitoring:</strong> Data drift detection"
           ]
         },
         {
           "name": "Cloud Platforms",
           "items": [
-            "<strong>GCP:</strong> Compute Engine, Storage, BigQuery, Vertex AI",
-            "<strong>AWS:</strong> EC2, S3, IAM, VPC, SageMaker",
-            "<strong>Services:</strong> Object storage, identity management, networking"
+            "<strong>AWS:</strong> EC2, S3, SageMaker"
           ]
         },
         {
           "name": "Analytics & BI Tools",
           "items": [
-            "<strong>Interactive dashboards:</strong> Streamlit, Power BI, Tableau",
-            "<strong>Dashboard features:</strong> Data modeling, interactive filters, row-level security",
-            "<strong>Spreadsheets:</strong> Excel, Google Sheets, Power Query"
+            "<strong>Interactive dashboards:</strong> Streamlit, Power BI",
+            "<strong>Spreadsheets:</strong> Excel, Google Sheets"
           ]
         }
       ]
@@ -313,7 +303,7 @@
           "name": "Regression & Multivariate Methods",
           "items": [
             "<strong>Generalized linear models:</strong> GLMs, GAMs, mixed effects models (GLMM)",
-            "<strong>Dimension reduction:</strong> PCA, ICA, manifold learning",
+            "<strong>Dimension reduction:</strong> PCA",
             "<strong>Diagnostics:</strong> Residual analysis, influence diagnostics, heteroscedasticity tests"
           ]
         },
@@ -321,15 +311,13 @@
           "name": "Time Series & Forecasting",
           "items": [
             "<strong>Classical methods:</strong> ARIMA, SARIMA, exponential smoothing",
-            "<strong>State-space models:</strong> Kalman filters, particle filters",
-            "<strong>Spectral analysis:</strong> FFT, wavelets, spectral density estimation"
+            "<strong>Spectral analysis:</strong> FFT, spectral density estimation"
           ]
         },
         {
           "name": "Optimization",
           "items": [
-            "<strong>Convex optimization:</strong> Gradient descent variants, proximal methods, ADMM",
-            "<strong>Numerical methods:</strong> L-BFGS, quasi-Newton methods, ODE/PDE solvers"
+            "<strong>Convex optimization:</strong> Gradient descent variants, proximal methods"
           ]
         }
       ]
@@ -342,9 +330,8 @@
         {
           "name": "Medical & Biomedical",
           "items": [
-            "<strong>Medical imaging:</strong> MRI, CT, X-ray modalities, PACS/RIS systems",
+            "<strong>Medical imaging:</strong> MRI, CT, X-ray and Proton Therapy modalities",
             "<strong>Oncology & immunology:</strong> Biomarkers, treatment response criteria, lymphocyte dynamics",
-            "<strong>Neuroscience:</strong> Neuroanatomy, functional MRI, diffusion tensor imaging, EEG/MEG",
             "<strong>Genomics:</strong> FASTA/FASTQ formats, Biopython, sequence analysis"
           ]
         },
@@ -397,7 +384,7 @@
       "position": "Administrator",
       "startDate": "2024-09-01",
       "endDate": "Present",
-      "summary": "Active member of the local ESN section, participating in the organization of events for international students."
+      "summary": "Active member of the local ESN section board, participating in the organization of events for international students."
     },
     {
       "organization": "Erasmus Student Network (ESN) Caen",

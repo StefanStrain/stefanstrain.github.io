@@ -1,12 +1,13 @@
 ---
 layout: page
 title: Brain Tumor Classifier
-description: In development
+description: Coming Soon
 img: assets/img/brain_mri.jpg
 importance: 1
 category: medical
 related_publications: true
-wip: true 
+wip: true
+redirect: "#"
 ---
 
 Every project has a beautiful feature showcase page.
