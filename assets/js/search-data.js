@@ -514,11 +514,11 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
-            },},{id: "projects-brain-tumor-classifier",
-          title: 'Brain Tumor Classifier',
-          description: "Coming Soon",
+            },},{id: "projects-3d-brain-tumour-segmentation",
+          title: '3D Brain Tumour Segmentation',
+          description: "Five deep learning architectures trained on 3D brain MRI scans, from a CNN baseline to a Transformer. A 2.4M-parameter model matched a 62M-parameter one. Everything built and benchmarked from scratch on a consumer GPU.",
           section: "Projects",handler: () => {
-              window.location.href = "/projects/mri_classifier/";
+              window.location.href = "/projects/mri_segmentation/";
             },},{
         id: 'social-email',
         title: 'email',
