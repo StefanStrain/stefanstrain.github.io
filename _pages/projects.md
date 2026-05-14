@@ -5,7 +5,7 @@ permalink: /projects/
 description: A growing collection of my projects.
 nav: true
 nav_order: 3
-display_categories: [medical, financial, other]
+display_categories: [medical, analytics, financial, other]
 horizontal: false
 ---
 
