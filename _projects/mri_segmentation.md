@@ -2,7 +2,7 @@
 layout: page
 title: 3D Brain Tumour Segmentation
 description: Five deep learning architectures trained on 3D brain MRI scans, from a CNN baseline to a Transformer. A 2.4M-parameter model matched a 62M-parameter one. Everything built and benchmarked from scratch on a consumer GPU.
-img: assets/img/brain_mri.jpg
+img: assets/img/brats_seg/overlay_attention_unet.png
 importance: 1
 category: medical
 related_publications: false
@@ -15,7 +15,26 @@ I trained and compared five 3D segmentation architectures on the **BraTS2021 bra
 
 > **The headline finding:** A 22M-parameter CNN with attention gates outperformed a 62M-parameter Transformer. A 2.4M-parameter KAN hybrid then matched the Transformer at **26× fewer parameters**. And a controlled ablation (one variable changed, everything else identical) showed that swapping just the bottleneck activations for KAN splines narrowly beat the attention mechanism on the most clinically important metric, all while using 12% of the available data.
 
-<a href="https://github.com/StefanStrain/brain_tumor_classifier" target="_blank" style="display:inline-block; margin-top:0.75rem; padding:7px 18px; border-radius:6px; font-size:0.93em; font-weight:600; background:var(--global-theme-color); color:#fff; text-decoration:none; letter-spacing:0.01em;">View on GitHub</a>
+<a href="https://github.com/StefanStrain/project_08_mri-segmentation" target="_blank" style="display:inline-flex; align-items:center; gap:8px; margin-top:0.75rem; padding:10px 24px; border-radius:6px; font-size:0.97em; font-weight:600; background:var(--global-theme-color); color:#fff; text-decoration:none; letter-spacing:0.01em; box-shadow:0 2px 8px rgba(0,0,0,0.18);"><svg height="18" width="18" viewBox="0 0 16 16" style="fill:currentColor;flex-shrink:0;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>View on GitHub</a>
+
+<nav style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:14px 18px; margin:1.25rem 0; font-size:0.88em;">
+  <strong style="display:block; margin-bottom:8px; font-size:0.78em; text-transform:uppercase; letter-spacing:.6px; color:#888;">Contents</strong>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px 28px;">
+    <a href="#the-problem" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">1.</span>The Problem</a>
+    <a href="#dataset--hardware-reality" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">2.</span>Dataset &amp; Hardware Reality</a>
+    <a href="#segmentation-overlays" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">3.</span>Segmentation Overlays</a>
+    <a href="#architecture-exploration" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">4.</span>Architecture Exploration</a>
+    <a href="#results-summary" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">5.</span>Results Summary</a>
+    <a href="#compare-any-two-models" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">6.</span>Compare Any Two Models</a>
+    <a href="#3d-tumour-mesh" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">7.</span>3D Tumour Mesh</a>
+    <a href="#attention-gate-heatmaps" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">8.</span>Attention Gate Heatmaps</a>
+    <a href="#uncertainty-heatmap-test-time-augmentation" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">9.</span>Uncertainty Heatmap</a>
+    <a href="#interactive-charts" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">10.</span>Interactive Charts</a>
+    <a href="#architecture-diagrams" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">11.</span>Architecture Diagrams</a>
+    <a href="#engineering-decisions" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">12.</span>Engineering Decisions</a>
+    <a href="#whats-next" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">13.</span>What's Next</a>
+  </div>
+</nav>
 
 ---
 
@@ -35,9 +54,9 @@ The challenge dataset defines **three clinically meaningful sub-regions**, each 
   <th style="padding:8px 16px; text-align:left; font-weight:600;">Clinical use</th>
 </tr></thead>
 <tbody>
-<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; white-space:nowrap;"><strong>WT</strong> — Whole Tumour</td><td style="padding:8px 16px;">NCR + ED + ET</td><td style="padding:8px 16px;">Surgery planning (how much tissue is affected)</td></tr>
-<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; white-space:nowrap;"><strong>TC</strong> — Tumour Core</td><td style="padding:8px 16px;">NCR + ET</td><td style="padding:8px 16px;">Core characterisation (the actively dangerous region)</td></tr>
-<tr><td style="padding:8px 16px; white-space:nowrap;"><strong>ET</strong> — Enhancing Tumour</td><td style="padding:8px 16px;">ET only</td><td style="padding:8px 16px;">Treatment response (is the tumour actually shrinking?)</td></tr>
+<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; white-space:nowrap;"><strong>WT</strong> - Whole Tumour</td><td style="padding:8px 16px;">NCR + ED + ET</td><td style="padding:8px 16px;">Surgery planning (how much tissue is affected)</td></tr>
+<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; white-space:nowrap;"><strong>TC</strong> - Tumour Core</td><td style="padding:8px 16px;">NCR + ET</td><td style="padding:8px 16px;">Core characterisation (the actively dangerous region)</td></tr>
+<tr><td style="padding:8px 16px; white-space:nowrap;"><strong>ET</strong> - Enhancing Tumour</td><td style="padding:8px 16px;">ET only</td><td style="padding:8px 16px;">Treatment response (is the tumour actually shrinking?)</td></tr>
 </tbody>
 </table>
 </div>
@@ -80,10 +99,10 @@ The [Brain Tumour Segmentation 2021 Challenge](http://braintumorsegmentation.org
 <table style="width:100%; border-collapse:collapse; font-size:0.92em;">
 <tbody>
 <tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; font-weight:600; white-space:nowrap; width:32%;">Cases</td><td style="padding:8px 16px;">1,251 patients</td></tr>
-<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; font-weight:600; white-space:nowrap;">Modalities</td><td style="padding:8px 16px;">FLAIR · T1 · T1CE · T2 (4 channels)</td></tr>
+<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; font-weight:600; white-space:nowrap;">Modalities</td><td style="padding:8px 16px;">FLAIR  -  T1  -  T1CE  -  T2 (4 channels)</td></tr>
 <tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; font-weight:600; white-space:nowrap;">Volume shape</td><td style="padding:8px 16px;">240 × 240 × 155 voxels, 1 mm isotropic</td></tr>
-<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; font-weight:600; white-space:nowrap;">Labels</td><td style="padding:8px 16px;">0 (background) · 1 (NCR) · 2 (ED) · 4 (ET)</td></tr>
-<tr><td style="padding:8px 16px; font-weight:600; white-space:nowrap;">Colour scheme</td><td style="padding:8px 16px;">NCR = red · ED = yellow · ET = cyan</td></tr>
+<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; font-weight:600; white-space:nowrap;">Labels</td><td style="padding:8px 16px;">0 (background)  -  1 (NCR)  -  2 (ED)  -  4 (ET)</td></tr>
+<tr><td style="padding:8px 16px; font-weight:600; white-space:nowrap;">Colour scheme</td><td style="padding:8px 16px;">NCR = red  -  ED = yellow  -  ET = cyan</td></tr>
 </tbody>
 </table>
 </div>
@@ -116,7 +135,7 @@ Drag the handle to compare **Ground Truth** (left) against the **Attention U-Net
   <img slot="second" src="{{ '/assets/img/brats_seg/overlay_attention_unet.png' | relative_url }}"   alt="Attention U-Net prediction" style="width:100%; display:block;" />
 </img-comparison-slider>
 <div class="caption">
-  <strong>Left:</strong> Ground truth &nbsp;·&nbsp; <strong>Right:</strong> Attention U-Net prediction &nbsp;·&nbsp;
+  <strong>Left:</strong> Ground truth &nbsp; - &nbsp; <strong>Right:</strong> Attention U-Net prediction &nbsp; - &nbsp;
   <span style="display:inline-block; width:10px; height:10px; background:rgb(255,51,51); border-radius:2px; vertical-align:middle;"></span> NCR &nbsp;
   <span style="display:inline-block; width:10px; height:10px; background:rgb(255,230,26); border-radius:2px; vertical-align:middle;"></span> ED &nbsp;
   <span style="display:inline-block; width:10px; height:10px; background:rgb(26,217,255); border-radius:2px; vertical-align:middle;"></span> ET
@@ -234,7 +253,7 @@ ET was the region I expected to benefit most. It's compact, has irregular bounda
   <th style="padding:7px 12px;">WT</th><th style="padding:7px 12px;">TC</th><th style="padding:7px 12px;">ET</th>
 </tr></thead>
 <tbody>
-<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:7px 12px; text-align:left; font-weight:600;">Ours — 150 cases</td><td style="padding:7px 12px;"><strong>0.886</strong></td><td style="padding:7px 12px;"><strong>0.884</strong></td><td style="padding:7px 12px;"><strong>0.875</strong></td></tr>
+<tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:7px 12px; text-align:left; font-weight:600;"> 150 case Attention U-Net </td><td style="padding:7px 12px;"><strong>0.886</strong></td><td style="padding:7px 12px;"><strong>0.884</strong></td><td style="padding:7px 12px;"><strong>0.875</strong></td></tr>
 <tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:7px 12px; text-align:left;">Published Attention U-Net (Oktay 2018)</td><td style="padding:7px 12px;">0.88–0.90</td><td style="padding:7px 12px;">0.82–0.87</td><td style="padding:7px 12px;">0.78–0.83</td></tr>
 <tr><td style="padding:7px 12px; text-align:left;">BraTS2021 challenge winner (nnU-Net)</td><td style="padding:7px 12px;">0.932</td><td style="padding:7px 12px;">0.888</td><td style="padding:7px 12px;">0.884</td></tr>
 </tbody>
@@ -465,9 +484,9 @@ Pick which predictions to put on each side of the divider, then drag the line to
   </div>
 
   <div class="mcw-legend">
-    <span><span class="mcw-swatch" style="background:rgb(255,51,51);"></span>NCR — necrotic core</span>
-    <span><span class="mcw-swatch" style="background:rgb(255,230,26);"></span>ED — peritumoral oedema</span>
-    <span><span class="mcw-swatch" style="background:rgb(26,217,255);"></span>ET — enhancing tumour</span>
+    <span><span class="mcw-swatch" style="background:rgb(255,51,51);"></span>NCR - necrotic core</span>
+    <span><span class="mcw-swatch" style="background:rgb(255,230,26);"></span>ED - peritumoral oedema</span>
+    <span><span class="mcw-swatch" style="background:rgb(26,217,255);"></span>ET - enhancing tumour</span>
   </div>
 </div>
 
@@ -666,7 +685,7 @@ The intuition: if the model gives the same answer regardless of how the brain is
 ### Model Comparison
 
 <iframe src="{{ '/assets/html/brats_seg/model_comparison.html' | relative_url }}"
-        width="100%" height="500" frameborder="0" scrolling="no"
+        width="100%" height="580" frameborder="0" scrolling="no"
         style="border-radius:8px; margin:0.5rem 0;"></iframe>
 <div class="caption">Full-volume Dice score per region across all five models (50 val cases, sliding-window inference at 50% overlap).</div>
 
@@ -675,14 +694,14 @@ The intuition: if the model gives the same answer regardless of how the brain is
 <iframe src="{{ '/assets/html/brats_seg/radar_comparison.html' | relative_url }}"
         width="100%" height="530" frameborder="0" scrolling="no"
         style="border-radius:8px; margin:0.5rem 0;"></iframe>
-<div class="caption">Radar chart — a larger polygon means better performance across all three tumour regions simultaneously.</div>
+<div class="caption">Radar chart (larger triangle means better performance across all three tumour regions simultaneously).</div>
 
 ### Parameter Efficiency
 
 <iframe src="{{ '/assets/html/brats_seg/params_vs_dice.html' | relative_url }}"
         width="100%" height="480" frameborder="0" scrolling="no"
         style="border-radius:8px; margin:0.5rem 0;"></iframe>
-<div class="caption">Mean Dice vs parameter count (log scale). KAN U-Net sits bottom-left — fewest parameters, same mean Dice as Swin UNETR top-right.</div>
+<div class="caption">Mean Dice vs parameter count (log scale). KAN U-Net sits bottom left (fewest parameters) while having the same mean Dice as Swin UNETR (top right).</div>
 
 ### Training Curves
 
@@ -769,7 +788,7 @@ The val Dice lines jump around quite a bit, and that's worth explaining. Each va
   </div>
 </div>
 <div class="caption">
-  All five architectures. Click any diagram to open full-size and zoom. Colour key: yellow-orange = standard DoubleConv blocks · purple = non-standard operations (Swin Transformer stages or KAN activations) · green nodes = attention gates · dark red = MaxPool · teal = upsampling · blue arcs = skip connections.
+  All five architectures. Click any diagram to open full-size and zoom. Colour key: yellow-orange = standard DoubleConv blocks  -  purple = non-standard operations (Swin Transformer stages or KAN activations)  -  green nodes = attention gates  -  dark red = MaxPool  -  teal = upsampling  -  blue arcs = skip connections.
 </div>
 
 ---
