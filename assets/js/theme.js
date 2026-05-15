@@ -80,6 +80,8 @@ let applyTheme = () => {
       bodyElement.setAttribute("data-jp-theme-light", "true");
       bodyElement.setAttribute("data-jp-theme-name", "JupyterLab Light");
     }
+    // Force browser to recalculate styles by triggering a reflow
+    void bodyElement.offsetHeight;
   }
 
   // Updates the background of medium-zoom overlay.

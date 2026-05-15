@@ -27,7 +27,7 @@ Automating 3D segmentation is interesting because it feeds directly into clinica
 
 The challenge dataset defines **three clinically meaningful sub-regions**, each evaluated separately because they're used for different purposes:
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em;">
 <thead><tr style="border-bottom:1px solid var(--global-divider-color,#ddd);">
   <th style="padding:8px 16px; text-align:left; font-weight:600;">Region</th>
@@ -76,7 +76,7 @@ A score of **0.88**, roughly what this project achieves, means the model's tumou
 
 The [Brain Tumour Segmentation 2021 Challenge](http://braintumorsegmentation.org/) dataset has 1,251 pre-operative multi-parametric MRI scans, each with four aligned modalities and an expert-drawn voxel-level mask.
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em;">
 <tbody>
 <tr style="border-bottom:1px solid var(--global-divider-color,#eee);"><td style="padding:8px 16px; font-weight:600; white-space:nowrap; width:32%;">Cases</td><td style="padding:8px 16px;">1,251 patients</td></tr>
@@ -128,42 +128,47 @@ Drag the handle to compare **Ground Truth** (left) against the **Attention U-Net
 
 Rather than picking a single architecture and optimising it, I designed this as a progression. Each model was chosen to answer a specific question raised by the previous one's results. The story goes from local to global, and then back again.
 
-<div style="max-width:480px; margin: 1.5rem 0; font-family:'Inter','Segoe UI',system-ui,sans-serif;">
+<div style="margin: 1.5rem 0; font-family:'Inter','Segoe UI',system-ui,sans-serif;">
 
-  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px;">
-    <strong>3D U-Net</strong> <span style="color:#888; font-size:0.85em;">· CNN baseline</span>
+  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px; text-align:center;">
+    <strong>3D U-Net</strong>
+    <span style="display:block; color:#888; font-size:0.85em;">CNN baseline</span>
   </div>
 
-  <div style="padding:6px 0 6px 20px; color:#888; font-size:0.82em; line-height:1.3;">
-    ↓ &nbsp;skip connections carry background noise into the decoder
+  <div style="padding:10px 0; color:#888; font-size:0.85em; line-height:1.5; text-align:center;">
+    ↓<br>The skip connections carry all encoder features directly into the decoder, including background regions that have nothing to do with the tumour. The model has no way to filter that out, which pushes it toward over-predicting.
   </div>
 
-  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px;">
-    <strong>Attention U-Net</strong> <span style="color:#888; font-size:0.85em;">· gated skip connections</span>
+  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px; text-align:center;">
+    <strong>Attention U-Net</strong>
+    <span style="display:block; color:#888; font-size:0.85em;">gated skip connections</span>
   </div>
 
-  <div style="padding:6px 0 6px 20px; color:#888; font-size:0.82em; line-height:1.3;">
-    ↓ &nbsp;attention gates are local — the convolution itself still is
+  <div style="padding:10px 0; color:#888; font-size:0.85em; line-height:1.5; text-align:center;">
+    ↓<br>The attention gates help the model focus on tumour-relevant regions in the skip connections. But each convolution still only looks at a small patch of nearby voxels at a time, so the model cannot reason about the tumour shape or context across the full brain.
   </div>
 
-  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px;">
-    <strong>Swin UNETR</strong> <span style="color:#888; font-size:0.85em;">· global Transformer, 62M params</span>
+  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px; text-align:center;">
+    <strong>Swin UNETR</strong>
+    <span style="display:block; color:#888; font-size:0.85em;">global Transformer, 62M params</span>
   </div>
 
-  <div style="padding:6px 0 6px 20px; color:#888; font-size:0.82em; line-height:1.3;">
-    ↓ &nbsp;too many parameters for 150 cases — overfits, beaten by the CNN
+  <div style="padding:10px 0; color:#888; font-size:0.85em; line-height:1.5; text-align:center;">
+    ↓<br>The Transformer has 62 million parameters but only 150 training cases to learn from. With that ratio it ends up memorising training patches rather than generalising, and scores worse than the much smaller CNN.
   </div>
 
-  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px;">
-    <strong>KAN U-Net</strong> <span style="color:#888; font-size:0.85em;">· lightweight hybrid, 2.42M params</span>
+  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px; text-align:center;">
+    <strong>KAN U-Net</strong>
+    <span style="display:block; color:#888; font-size:0.85em;">lightweight hybrid, 2.42M params</span>
   </div>
 
-  <div style="padding:6px 0 6px 20px; color:#888; font-size:0.82em; line-height:1.3;">
-    ↓ &nbsp;architecture has multiple differences from the baseline — hard to isolate KAN activations specifically
+  <div style="padding:10px 0; color:#888; font-size:0.85em; line-height:1.5; text-align:center;">
+    ↓<br>This model changes several things at once compared to the baseline: fewer convolutions per level, a lighter bottleneck, and KAN activations. If it performs differently there is no clean way to know which change is responsible.
   </div>
 
-  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px;">
-    <strong>KAN 3D U-Net</strong> <span style="color:#888; font-size:0.85em;">· ablation — KAN bottleneck only</span>
+  <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:10px 16px; text-align:center;">
+    <strong>KAN 3D U-Net</strong>
+    <span style="display:block; color:#888; font-size:0.85em;">3D U-Net with KAN activations at the bottleneck</span>
   </div>
 
 </div>
@@ -178,7 +183,7 @@ Building this first was important for a reason beyond the Dice score. It establi
 
 **Where it falls short:** A 3×3×3 convolution kernel sees 27 neighbouring voxels at a time. That's fine for local texture and edges, but brain tumours have long-range spatial structure. The shape of the enhancing tumour rim on one side relates to the necrotic core on the other. Without many stacked layers, the model can't reason across that distance. And the skip connections pass *everything* from encoder to decoder, including background activations that push the decoder toward over-segmenting.
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em; text-align:center;">
 <thead><tr style="border-bottom:1px solid var(--global-divider-color,#ddd);">
   <th style="padding:7px 12px; text-align:left;">Region</th>
@@ -207,7 +212,7 @@ This is the mechanism visualised in the attention heatmaps further down the page
 
 ET was the region I expected to benefit most. It's compact, has irregular boundaries, and is hardest to distinguish from surrounding tissue. The results confirmed what I expected.
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em; text-align:center;">
 <thead><tr style="border-bottom:1px solid var(--global-divider-color,#ddd);">
   <th style="padding:7px 12px; text-align:left;">Region</th>
@@ -222,7 +227,7 @@ ET was the region I expected to benefit most. It's compact, has irregular bounda
 
 **How this compares to published results (all trained on the full 1,251 cases):**
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em; text-align:center;">
 <thead><tr style="border-bottom:1px solid var(--global-divider-color,#ddd);">
   <th style="padding:7px 12px; text-align:left;"></th>
@@ -248,7 +253,7 @@ Attention gates help, but they still operate on convolutional features. The loca
 
 Swin UNETR does exactly that. It tokenises the 3D volume into small patches and passes them through a hierarchical Swin Transformer encoder, where every token attends to every other token within its local window and those windows shift between layers to allow global context to accumulate. A voxel near the front of the brain can, in principle, directly influence predictions near the back. The decoder stays CNN-based, keeping the upsampling path efficient.
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em; text-align:center;">
 <thead><tr style="border-bottom:1px solid var(--global-divider-color,#ddd);">
   <th style="padding:7px 12px; text-align:left;">Region</th>
@@ -280,9 +285,11 @@ Originally, the plan was to implement CDA-Mamba here (a recent state-space model
 
 KAN U-Net is the experiment that tests the lightweight direction. It's a 3D U-Net backbone where the standard activations at the two deepest spatial levels are replaced with **KAN (Kolmogorov-Arnold Network) activations**, learnable spline functions rather than fixed nonlinearities. The rest of the architecture stays slim, with a single convolution per level, a depth-wise separable bottleneck, and squeeze-and-excitation channel attention. Total parameter count is **2.42M**.
 
-The key idea behind KANs is that in a standard network, the weights are learnable scalars and the activations (ReLU, GELU) are fixed. KANs flip this. The activations themselves are learnable curves (B-splines and Bernstein polynomials), grounded in the Kolmogorov-Arnold representation theorem, which says any continuous function can be expressed as compositions of univariate functions. Two activation types are used per block. **KAB (Bernstein)** activations are globally smooth polynomials, suited for capturing broad tumour structure. **KAS (B-spline)** activations are locally adaptive, better suited for fine-grained boundary features.
+The key idea behind KANs is that in a standard network, the weights are learnable but the activation functions (ReLU, GELU) are fixed shapes. KANs flip this: the activations themselves become learnable curves that adapt during training. The theoretical basis is the Kolmogorov-Arnold representation theorem, which states that any continuous function can be broken down into compositions of simpler single-variable functions.
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+Two curve types are used per block. One uses smooth global curves suited for capturing the broad shape of the tumour, called **KAB** (Bernstein polynomials). The other uses locally adaptive curves better suited for fine-grained boundary detail, called **KAS** (B-splines).
+
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em; text-align:center;">
 <thead><tr style="border-bottom:1px solid var(--global-divider-color,#ddd);">
   <th style="padding:7px 12px; text-align:left;">Region</th>
@@ -305,7 +312,7 @@ Something that had been nagging at me was that the U-KABS architecture (KAN U-Ne
 
 One variable. Everything else identical.
 
-<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0;">
+<div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em; text-align:center;">
 <thead><tr style="border-bottom:1px solid var(--global-divider-color,#ddd);">
   <th style="padding:7px 12px; text-align:left;">Region</th>
@@ -547,9 +554,19 @@ The segmentation mask isn't just a 2D outline. It's a full 3D volume. Running Ma
 
 Drag to rotate, scroll to zoom. Click legend entries to toggle regions on and off.
 
-<iframe src="{{ '/assets/html/brats_seg/tumor_mesh_3d.html' | relative_url }}"
-        width="100%" height="580" frameborder="0" scrolling="no"
-        style="border-radius:8px; margin:0.5rem 0; background:rgb(13,13,20);"></iframe>
+<div style="position:relative; border-radius:8px; margin:0.5rem 0; overflow:hidden;">
+  <iframe src="{{ '/assets/html/brats_seg/tumor_mesh_3d.html' | relative_url }}"
+          width="100%" height="580" frameborder="0" scrolling="no"
+          style="border-radius:8px; display:block; background:rgb(13,13,20);"></iframe>
+  <div id="mesh-hint" onclick="this.style.display='none'"
+       style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:8px;">
+    <div style="text-align:center; color:rgba(255,255,255,0.85); font-family:'Inter','Segoe UI',system-ui,sans-serif; pointer-events:none;">
+      <div style="font-size:2em; margin-bottom:8px;">↺</div>
+      <div style="font-weight:600; font-size:0.95em;">Click and drag to rotate</div>
+      <div style="font-size:0.82em; margin-top:5px; color:rgba(255,255,255,0.55);">Scroll to zoom · click legend entries to toggle regions</div>
+    </div>
+  </div>
+</div>
 <p class="text-muted" style="font-size:0.82em; margin-top:0.2em;">
   Case BraTS2021_01619 ground truth, rendered with Marching Cubes. Brain surface (step size 5, 7k verts) · NCR red (3.9k verts) · ED yellow (10.2k verts) · ET cyan (7.8k verts).
 </p>
@@ -759,7 +776,7 @@ The val Dice lines jump around quite a bit, and that's worth explaining. Each va
 
 ## Engineering Decisions
 
-A few decisions that shaped how the project ran. Some were obvious in hindsight, a couple less so.
+A few decisions that shaped how the project ran. Some were kind of obvious, and some less so.
 
 <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:14px 18px; margin:0.75rem 0;">
 <p style="margin:0 0 5px 0; font-weight:600; font-size:0.95em;">npy preprocessing cache</p>
