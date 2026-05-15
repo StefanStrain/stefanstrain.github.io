@@ -19,7 +19,8 @@ I trained and compared five 3D segmentation architectures on the **BraTS2021 bra
 
 <nav style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:14px 18px; margin:1.25rem 0; font-size:0.88em;">
   <strong style="display:block; margin-bottom:8px; font-size:0.78em; text-transform:uppercase; letter-spacing:.6px; color:#888;">Contents</strong>
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px 28px;">
+  <style>#toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px;}@media(max-width:575.98px){#toc-grid{grid-template-columns:1fr;}}</style>
+  <div id="toc-grid">
     <a href="#the-problem" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">1.</span>The Problem</a>
     <a href="#dataset--hardware-reality" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">2.</span>Dataset &amp; Hardware Reality</a>
     <a href="#segmentation-overlays" style="color:var(--global-theme-color); text-decoration:none;"><span style="color:#888; margin-right:5px;">3.</span>Segmentation Overlays</a>
@@ -639,24 +640,24 @@ These were extracted by registering forward hooks on each `AttentionGate3d` modu
 </script>
 
 <div class="row">
-  <div class="col-sm mt-3 mt-md-0">
+  <div class="col-12 col-sm mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/attention_gate_1.png' | relative_url }}" onclick="gateLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/attention_gate_1.png" title="Attention Gate Level 1" class="img-fluid rounded z-depth-1" caption="Gate 1 — deepest level (8³ resolution). Coarse, diffuse activation over the broad tumour region." %}
     </a>
   </div>
-  <div class="col-sm mt-3 mt-md-0">
+  <div class="col-12 col-sm mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/attention_gate_2.png' | relative_url }}" onclick="gateLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/attention_gate_2.png" title="Attention Gate Level 2" class="img-fluid rounded z-depth-1" caption="Gate 2 — activation begins to localise around the tumour core and surrounding oedema." %}
     </a>
   </div>
 </div>
 <div class="row">
-  <div class="col-sm mt-3 mt-md-0">
+  <div class="col-12 col-sm mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/attention_gate_3.png' | relative_url }}" onclick="gateLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/attention_gate_3.png" title="Attention Gate Level 3" class="img-fluid rounded z-depth-1" caption="Gate 3 — sharper focus, starting to trace the tumour boundary more precisely." %}
     </a>
   </div>
-  <div class="col-sm mt-3 mt-md-0">
+  <div class="col-12 col-sm mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/attention_gate_4.png' | relative_url }}" onclick="gateLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/attention_gate_4.png" title="Attention Gate Level 4" class="img-fluid rounded z-depth-1" caption="Gate 4 — shallowest level (128³ resolution). Fine-grained activation concentrated on tumour edges and the enhancing rim." %}
     </a>
@@ -757,31 +758,31 @@ The val Dice lines jump around quite a bit, and that's worth explaining. Each va
 </script>
 
 <div class="row mt-3">
-  <div class="col-sm-6 mt-3 mt-md-0">
+  <div class="col-12 col-sm-6 mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/arch_unet3d.png' | relative_url }}" onclick="archLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/arch_unet3d.png" title="3D U-Net" caption="3D U-Net — encoder-decoder with skip connections." class="img-fluid rounded z-depth-1" %}
     </a>
   </div>
-  <div class="col-sm-6 mt-3 mt-md-0">
+  <div class="col-12 col-sm-6 mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/arch_attention_unet3d.png' | relative_url }}" onclick="archLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/arch_attention_unet3d.png" title="Attention U-Net" caption="Attention U-Net — green attention gate nodes on each skip connection." class="img-fluid rounded z-depth-1" %}
     </a>
   </div>
 </div>
 <div class="row mt-2">
-  <div class="col-sm-6 mt-3 mt-md-0">
+  <div class="col-12 col-sm-6 mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/arch_swin_unetr.png' | relative_url }}" onclick="archLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/arch_swin_unetr.png" title="Swin UNETR" caption="Swin UNETR — purple Swin Transformer stages replace the CNN encoder." class="img-fluid rounded z-depth-1" %}
     </a>
   </div>
-  <div class="col-sm-6 mt-3 mt-md-0">
+  <div class="col-12 col-sm-6 mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/arch_kan_unet3d.png' | relative_url }}" onclick="archLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/arch_kan_unet3d.png" title="KAN U-Net (U-KABS)" caption="KAN U-Net — slim ConvSE encoder, purple KABS blocks at the two deepest levels." class="img-fluid rounded z-depth-1" %}
     </a>
   </div>
 </div>
 <div class="row mt-2">
-  <div class="col-sm-6 mt-3 mt-md-0">
+  <div class="col-12 col-sm-6 mt-3 mt-md-0">
     <a href="{{ '/assets/img/brats_seg/arch_kan_unet3d_full.png' | relative_url }}" onclick="archLbOpen(this); return false;" style="cursor:pointer;">
       {% include figure.liquid path="assets/img/brats_seg/arch_kan_unet3d_full.png" title="KAN 3D U-Net (ablation)" caption="KAN 3D U-Net — identical to the 3D U-Net baseline except the purple bottleneck block uses KAN activations (Bernstein + B-spline) instead of LeakyReLU. Everything else unchanged." class="img-fluid rounded z-depth-1" %}
     </a>
