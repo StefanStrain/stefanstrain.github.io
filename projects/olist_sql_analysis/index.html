@@ -21,10 +21,17 @@
     }
 
     fetch("/assets/schemas/project_04_schema.svg")
-      .then(function (r) { return r.text(); })
+      .then(function (r) {
+        if (!r.ok) throw new Error('schema svg ' + r.status);
+        return r.text();
+      })
       .then(function (svgText) {
+        // never inject a non-SVG response (e.g. a 404 page, which can carry a
+        // meta-refresh that would hijack this page) into the container
+        if (svgText.indexOf('<svg') === -1) return;
         container.innerHTML = svgText;
         var svg = container.querySelector('svg');
+        if (!svg) return;
         svg.setAttribute('id', 'schema-zoom-svg');
         svg.style.width = '100%';
         svg.style.height = '100%';
@@ -43,6 +50,9 @@
           if (!active) return;
           pz.resetZoom(); pz.center(); pz.fit();
         });
+      })
+      .catch(function () {
+        // schema failed to load: leave the placeholder container in place
       });
 
     overlay.addEventListener('click', function () { setActive(true); });
