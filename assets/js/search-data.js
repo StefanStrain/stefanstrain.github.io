@@ -519,6 +519,11 @@ ninja.data = [{
           description: "Five deep learning architectures trained on 3D brain MRI scans, from a CNN baseline to a Transformer. A 2.4M-parameter model matched a 62M-parameter one. Everything built and benchmarked from scratch on a consumer GPU.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/mri_segmentation/";
+            },},{id: "projects-olist-e-commerce-sql-analysis",
+          title: 'OLIST E-Commerce SQL Analysis',
+          description: "SQL analytics on 100k real Brazilian e-commerce orders, then the PostgreSQL-specific techniques behind them. Two notebooks, PostgreSQL 15.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/olist_sql_analysis/";
             },},{
         id: 'social-email',
         title: 'email',
