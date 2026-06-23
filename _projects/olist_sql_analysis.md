@@ -3,7 +3,7 @@ layout: page
 title: OLIST E-Commerce SQL Analysis
 description: SQL analytics on 100k real Brazilian e-commerce orders, then the PostgreSQL-specific techniques behind them. Two notebooks, PostgreSQL 15.
 img: assets/img/schema_diagram.png
-importance: 1
+importance: 2
 category: analytics
 related_publications: false
 tags: [PostgreSQL, SQL, Python, Data Analysis]
@@ -81,10 +81,17 @@ A few results that were actually surprising. This is a selection, the full set i
     }
 
     fetch("{{ '/assets/schemas/project_04_schema.svg' | relative_url }}")
-      .then(function (r) { return r.text(); })
+      .then(function (r) {
+        if (!r.ok) throw new Error('schema svg ' + r.status);
+        return r.text();
+      })
       .then(function (svgText) {
+        // never inject a non-SVG response (e.g. a 404 page, which can carry a
+        // meta-refresh that would hijack this page) into the container
+        if (svgText.indexOf('<svg') === -1) return;
         container.innerHTML = svgText;
         var svg = container.querySelector('svg');
+        if (!svg) return;
         svg.setAttribute('id', 'schema-zoom-svg');
         svg.style.width = '100%';
         svg.style.height = '100%';
@@ -103,6 +110,9 @@ A few results that were actually surprising. This is a selection, the full set i
           if (!active) return;
           pz.resetZoom(); pz.center(); pz.fit();
         });
+      })
+      .catch(function () {
+        // schema failed to load: leave the placeholder container in place
       });
 
     overlay.addEventListener('click', function () { setActive(true); });
