@@ -330,7 +330,7 @@ Two curve types are used per block. One uses smooth global curves suited for cap
 
 Something that had been nagging at me was that the U-KABS architecture (KAN U-Net) differs from the 3D U-Net in more than just its activations. It also uses single convolutions per level, a depth-wise bottleneck, and SE channel attention. So even if U-KABS performs well, you can't cleanly attribute that to the KAN activations specifically. To settle the question, I ran a controlled ablation using the **exact same 3D U-Net architecture**, with the single change of replacing the two LeakyReLU activations in the bottleneck with KAN activations (Bernstein + B-spline). Every encoder block, every decoder block, every skip connection, unchanged. Only the bottleneck activation function differs.
 
-One variable. Everything else identical.
+That gives a clean ablation, one variable changed and everything else kept identical. 
 
 <div style="background:var(--global-code-bg-color,#f8f8f8); border:1px solid var(--global-divider-color,#ddd); border-radius:8px; padding:4px 0; margin:1rem 0; overflow-x:auto;">
 <table style="width:100%; border-collapse:collapse; font-size:0.92em; text-align:center;">
@@ -671,7 +671,7 @@ These were extracted by registering forward hooks on each `AttentionGate3d` modu
 
 ## Uncertainty Heatmap (Test-Time Augmentation)
 
-Knowing *where* the model is confident matters as much as the prediction itself. The maps below were produced using the **Attention U-Net**, the best-performing model in this comparison. To get a per-voxel confidence estimate without any architectural changes, I ran inference 8 times, each time with a different combination of axis flips applied to the input and then undone on the output. Averaging these 8 predictions gives a more robust final mask; the per-voxel standard deviation across them gives an uncertainty map.
+Knowing *where* the model is confident matters as much as the prediction itself. The maps below were produced using the **Attention U-Net**, the best-performing model in this comparison. To get a per-voxel confidence estimate without any architectural changes, I ran inference 8 times, each time with a different combination of axis flips applied to the input and then undone on the output. Averaging these 8 predictions gives a more robust final mask, the per-voxel standard deviation across them gives an uncertainty map.
 
 The intuition: if the model gives the same answer regardless of how the brain is oriented, it's confident. If the answer shifts with orientation, something there is ambiguous.
 

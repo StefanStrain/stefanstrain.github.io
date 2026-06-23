@@ -77,7 +77,7 @@
       "startDate": "",
       "endDate": "2024",
       "score": "10",
-      "courses": ["<strong>Statistical Theory and Methadology:</strong> Rigorous training in multivariate data analysis, classification, regression models, and time series analysis for forecasting and modeling stochastic processes.", "<strong>Implementation of statistical models and algorithms:</strong> Implementation using statistical software (Pythong, R and SAS), with a focus on Operational Research, Discrete Optimization and Machine Learning.", "<strong>Internships and Projects:</strong> Executed internships in statistical research (Oncology) and machine learning (Finance), as well as personal projects in Deep Learning applied to Medical Imaging."]
+      "courses": ["<strong>Statistical Theory and Methodology:</strong> Rigorous training in multivariate data analysis, classification, regression models, and time series analysis for forecasting and modeling stochastic processes.", "<strong>Implementation of statistical models and algorithms:</strong> Implementation using statistical software (Python, R and SAS), with a focus on Operational Research, Discrete Optimization and Machine Learning.", "<strong>Internships and Projects:</strong> Executed internships in statistical research (Oncology) and machine learning (Finance), as well as personal projects in Deep Learning applied to Medical Imaging."]
     }
   ],
   "projects": [
@@ -120,7 +120,6 @@
   "skills": [
     {
       "name": "Programming languages",
-      "level": "Advanced",
       "icon": "fa-solid fa-code",
       "subSkills": [
         {
@@ -132,17 +131,15 @@
             "||",
             "ML/DL (scikit-learn, PyTorch, TensorFlow, Transformers)",
             "||",
-            "Data apps & APIs (Streamlit, Dash, FastAPI, Flask, Pydantic)",
+            "Data apps & APIs (Streamlit, FastAPI, Flask, Pydantic)",
             "||",
-            "Probabilistic & stats (statsmodels, PyMC, pyro/numpyro)",
+            "Probabilistic & stats (statsmodels)",
             "||",
-            "Packaging & quality (Poetry, hatch, black, mypy, pytest)",
+            "Packaging & quality (Poetry, black, mypy, pytest)",
             "||",
             "Dev environments (JupyterLab, Jupyter Notebook, VS Code)",
             "||",
-            "Big data (PySpark DataFrames/Spark SQL basics)",
-            "||",
-            "Packaging & quality (Poetry, hatch, black, mypy, pytest)"
+            "Big data (PySpark DataFrames/Spark SQL basics)"
           ]
         },
         {
@@ -157,6 +154,7 @@
           "items": [
             "ANSI SQL, window functions, CTEs",
             "Query planning and optimisation, UDFs in warehouses",
+            "EXPLAIN ANALYZE, indexing strategy (covering & expression indexes)",
             "Analytics queries (funnels, cohorts, churn/LTV, KPI tables)"
           ]
         },
@@ -170,7 +168,6 @@
     },
     {
       "name": "Mathematics",
-      "level": "Advanced",
       "icon": "fa-solid fa-calculator",
       "subSkills": [
         {
@@ -184,9 +181,7 @@
           "name": "Calculus & analysis",
           "items": [
             "Multivariate calculus, Taylor expansions",
-            "Real/measure-theoretic basics (limits, convergence)",
-            "||",
-            "Functional analysis (Hilbert spaces, RKHS)"
+            "Real/measure-theoretic basics (limits, convergence)"
           ]
         },
         {
@@ -219,7 +214,7 @@
         {
           "name": "High-Dimensional Statistics",
           "items": [
-            "Sparse regression (Lasso theory, SIS)",
+            "Sparse regression (Lasso theory)",
             "Random Matrix Theory (basics)"
           ]
         },
@@ -260,7 +255,6 @@
     },
     {
       "name": "Classical Machine Learning",
-      "level": "Advanced",
       "icon": "fa-solid fa-robot",
       "subSkills": [
         {
@@ -307,8 +301,6 @@
             "Semi/weak supervision, active learning",
             "Anomaly/one-class detection",
             "||",
-            "Causal inference basics (DAGs, back-/front-door, IV, matching)",
-            "||",
             "Experimentation (A/B/n, CUPED, sequential tests, power)",
             "||",
             "Interpretability (permutation importance, SHAP, partial dependence)"
@@ -318,7 +310,6 @@
     },
     {
       "name": "Deep learning",
-      "level": "Advanced",
       "icon": "fa-solid fa-layer-group",
       "subSkills": [
         {
@@ -337,7 +328,9 @@
             "||",
             "Transformers (BERT-style, ViT/SwIN)",
             "||",
-            "Autoencoders/VAEs, diffusion models, GANs"
+            "Attention mechanisms, KAN activations",
+            "||",
+            "Autoencoders, diffusion models, GANs"
           ]
         },
         {
@@ -365,9 +358,9 @@
           "items": [
             "Classical (tokenisation, TF-IDF, topic models, NER basics)",
             "||",
-            "Transformers (BERT fine-tuning, instruction tuning )",
+            "Transformers (BERT fine-tuning, instruction tuning)",
             "||",
-            "Retrieval & agents (RAG, FAISS/Milvus, tool use/function calling)",
+            "Retrieval & agents (RAG, tool use/function calling)",
             "||",
             "Evaluation (factuality, hallucination, bias/safety)"
           ]
@@ -384,7 +377,6 @@
     },
     {
       "name": "Data & MLOps tools and platforms",
-      "level": "Advanced",
       "icon": "fa-solid fa-server",
       "subSkills": [
         {
@@ -400,42 +392,38 @@
         {
           "name": "Orchestration & ELT/ETL",
           "items": [
-            "Prefect",
             "dbt (models, tests, exposures)",
             "||",
-            "Ingestion (Fivetran/Stitch, custom Python ETL)"
+            "Ingestion (custom Python ETL)"
           ]
         },
         {
           "name": "Experiment & model tracking",
           "items": [
             "MLflow (tracking/registry)", "AWS Sagemaker Experiments",
-            "Data/versioning (Git/GitHub)"
+            "Data/versioning (Git/GitHub)",
+            "Reproducible, experiment-tracked research (seeds, fixed configs, run logs)"
           ]
         },
         {
           "name": "Serving & deployment",
           "items": [
-            "Docker, Kubernetes",
+            "Docker, Docker Compose, Kubernetes",
             "Model servers (AWS Sagemaker, FastAPI)",
-            "Streaming & messaging (Kafka, Pub/Sub basics)",
             "System design for ML services (batch & real-time scoring, microservices)"
           ]
         },
         {
           "name": "Monitoring & observability",
           "items": [
-            "Prometheus/Grafana basics",
-            "Drift/outlier detection, feature health, performance SLOs",
-            "||",
-            "Data quality (Great Expectations, Soda basics)"
+            "Drift/outlier detection, feature health, performance SLOs"
           ]
         },
         {
           "name": "Cloud",
           "items": [
             "GCP, AWS",
-            "Object storage (S3/GCS), IAM/secrets, VPC/networking",
+            "Object storage (S3/GCS), IAM/secrets",
             "Managed ML (SageMaker)"
           ]
         },
@@ -451,7 +439,6 @@
     },
     {
       "name": "Others (domain, research, comms, bonus)",
-      "level": "Advanced",
       "icon": "fa-solid fa-star",
       "subSkills": [
         {
@@ -503,7 +490,7 @@
     },
     {
       "language": "Portuguese",
-      "fluency": "Begginner (A1 level)",
+      "fluency": "Beginner (A1 level)",
       "icon": ""
     }
   ],

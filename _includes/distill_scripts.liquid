@@ -265,6 +265,16 @@
   ></script>
 {% endif %}
 
+{% if site.enable_goatcounter_analytics %}
+  <!-- GoatCounter (privacy-friendly, cookieless analytics). Skips your own visits when
+       localStorage 'skipgc' is set to 't', and skips localhost automatically. -->
+  <script
+    data-goatcounter="https://{{ site.goatcounter_code }}.goatcounter.com/count"
+    async
+    src="//gc.zgo.at/count.js"
+  ></script>
+{% endif %}
+
 {% if site.enable_progressbar %}
   <!-- Scrolling Progress Bar -->
   <script defer src="{{ '/assets/js/progress-bar.js' | relative_url | bust_file_cache }}" type="text/javascript"></script>
