@@ -18,7 +18,7 @@ layout: default
     <h1 class="post-title clearfix">
       {{ page.title }}
       {% if page.cv_pdfs %}
-        <span class="float-right">
+        <span class="float-right cv-pdf-buttons">
           {% for pdf in page.cv_pdfs %}
             {% assign pdf_href = pdf.url | default: pdf.file %}
             <a

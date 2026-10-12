@@ -26,5 +26,18 @@
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", apply);
 })();
 </script>
+<script>
+  // Phone layout: these charts were exported at desktop size, so tighten them when the frame is narrow
+  window.addEventListener("load", function () {
+    if (window.innerWidth >= 576 || !window.Plotly) return;
+    var gd = document.querySelector(".plotly-graph-div");
+    if (!gd) return;
+    var base = { "font.size": 11, "title.font.size": 14, "title.x": 0.5, "title.xanchor": "center", "margin.l": 50, "margin.r": 12, "margin.t": 50 };
+    // point labels overlap on a narrow chart, use a legend instead
+    var upd = { "title.text": "Mean Dice vs model size", "showlegend": true, "legend.orientation": "h", "legend.y": -0.25, "legend.x": 0.5, "legend.xanchor": "center", "margin.b": 110 };
+    Plotly.restyle(gd, { mode: "markers" });
+    Plotly.relayout(gd, Object.assign(base, upd));
+  });
+</script>
 </body>
 </html>

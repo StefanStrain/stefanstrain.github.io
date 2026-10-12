@@ -8,6 +8,14 @@ category: medical
 related_publications: false
 tags: [Python, PyTorch, MONAI, Medical Imaging, 3D Segmentation, Transformers, MLflow]
 ---
+<style>
+  /* phones: tighter cells so the results tables fit without sideways scrolling */
+  @media (max-width: 575.98px) {
+    div[style*="overflow-x:auto"] th,
+    div[style*="overflow-x:auto"] td { padding: 6px 5px !important; font-size: 0.85em; }
+  }
+</style>
+
 
 ## TL;DR
 
@@ -708,7 +716,11 @@ The intuition: if the model gives the same answer regardless of how the brain is
 
 The val Dice lines jump around quite a bit, and that's worth explaining. Each validation pass during training runs on random 128³ patches (not the full brain). With only 50 val cases in the pool, any given epoch might happen to sample more background-heavy regions, or catch the enhancing tumour edge on every case, and that swings the aggregate Dice by a few points in either direction. It's sampling noise, not instability. The final numbers in the results tables are a different story. Those come from sliding-window inference across the entire volume, which averages all of that out and is why the reported scores are both more stable and a bit higher than the mid-training curves suggest.
 
-<iframe src="{{ '/assets/html/brats_seg/training_curves.html' | relative_url }}"
+<style>
+  /* the chart stacks its four panels on phones, so it needs a taller frame */
+  @media (max-width: 575.98px) { .training-curves-frame { height: 1120px; } }
+</style>
+<iframe class="training-curves-frame" src="{{ '/assets/html/brats_seg/training_curves.html' | relative_url }}"
         width="100%" height="630" frameborder="0" scrolling="no"
         style="border-radius:8px; margin:0.5rem 0;"></iframe>
 <div class="caption">Loss and Dice per epoch from MLflow. Swin UNETR has the lowest final training loss (0.099), yet underperforms on full-volume evaluation (the textbook signature of overfitting on a small dataset).</div>

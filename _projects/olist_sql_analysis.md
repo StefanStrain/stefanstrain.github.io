@@ -44,6 +44,10 @@ A few results that were actually surprising. This is a selection, the full set i
 
 11 tables. `orders` sits at the centre, linking customers to the items they bought, the payments they made, and the reviews they left. Each `order_item` ties an order to a specific product and seller, while customers and sellers connect out to geolocation via Brazilian zip-code prefixes. This star-like layout (transactional fact tables surrounded by descriptive dimensions) is what makes the dataset well suited to the joins, aggregations, and window functions used throughout.
 
+<style>
+  /* the diagram is wide, so a shorter frame wastes less space on phones */
+  @media (max-width: 575.98px) { #schema-zoom-wrapper { height: 320px !important; } }
+</style>
 <div id="schema-zoom-wrapper" style="position: relative; width: 100%; height: 600px;">
   <div id="schema-zoom-container" style="width: 100%; height: 100%; border: 1px solid var(--global-divider-color); border-radius: 6px; overflow: hidden; background: var(--global-bg-color);">
     <!-- inline SVG injected by script below -->
@@ -52,7 +56,7 @@ A few results that were actually surprising. This is a selection, the full set i
     Click to interact (scroll to zoom, drag to pan, double-click to reset)
   </div>
 </div>
-<p class="text-muted" style="font-size: 0.85em; margin-top: 0.4em;">
+<p id="schema-zoom-hint" class="text-muted" style="font-size: 0.85em; margin-top: 0.4em;">
   Click outside the diagram or press <kbd>Esc</kbd> to release.
 </p>
 <p class="text-muted" style="font-size: 0.85em; margin-top: 0.4em;">
@@ -67,6 +71,15 @@ A few results that were actually surprising. This is a selection, the full set i
     var overlay = document.getElementById('schema-zoom-overlay');
     var pz = null;
     var active = false;
+    var svgUrl = "{{ '/assets/schemas/project_04_schema.svg' | relative_url }}";
+    // svg-pan-zoom has no touch gestures, so on touch screens a tap opens the full-size
+    // diagram instead, where the browser's own pinch-zoom works
+    var touch = window.matchMedia('(pointer: coarse)').matches;
+    if (touch) {
+      overlay.textContent = 'Tap to open the full-size diagram';
+      var hint = document.getElementById('schema-zoom-hint');
+      if (hint) hint.style.display = 'none';
+    }
 
     function setActive(on) {
       if (!pz) return;
@@ -80,7 +93,7 @@ A few results that were actually surprising. This is a selection, the full set i
       }
     }
 
-    fetch("{{ '/assets/schemas/project_04_schema.svg' | relative_url }}")
+    fetch(svgUrl)
       .then(function (r) {
         if (!r.ok) throw new Error('schema svg ' + r.status);
         return r.text();
@@ -115,7 +128,10 @@ A few results that were actually surprising. This is a selection, the full set i
         // schema failed to load: leave the placeholder container in place
       });
 
-    overlay.addEventListener('click', function () { setActive(true); });
+    overlay.addEventListener('click', function () {
+      if (touch) window.open(svgUrl, '_blank', 'noopener');
+      else setActive(true);
+    });
     document.addEventListener('click', function (e) {
       if (active && !wrapper.contains(e.target)) setActive(false);
     });
@@ -185,6 +201,15 @@ The project is split across two notebooks. The first is the practice run through
   .nb-collapse .nb-body { padding: 0.5rem 0.75rem 0.75rem; }
   /* avoid a white flash before the notebook paints / themes itself */
   .nb-collapse iframe { background: var(--global-bg-color); }
+  /* phones: put the expand button under the text instead of squeezing the text beside it */
+  @media (max-width: 575.98px) {
+    .nb-collapse > summary {
+      grid-template-columns: auto 1fr;
+      padding: 0.9rem 1rem;
+      gap: 0.4rem 0.75rem;
+    }
+    .nb-collapse .nb-cta { grid-column: 2; justify-self: start; margin-top: 0.35rem; }
+  }
 </style>
 
 <details class="nb-collapse">

@@ -1101,7 +1101,9 @@ nav[data-toggle="toc"] {
 /* small screens */
 @media (max-width: 576px) {
   /* override stickyness so that the navigation does not follow scrolling */
-  nav[data-toggle="toc"] {
+  /* #toc-sidebar too, so it is hidden before the TOC script tags it and doesn't flash over the title */
+  nav[data-toggle="toc"],
+  #toc-sidebar {
     visibility: hidden;
     height: 0;
     top: 0;

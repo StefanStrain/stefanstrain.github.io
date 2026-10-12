@@ -218,3 +218,20 @@ ul.timeline li::before {
      color: var(--global-text-color);
 }
 */
+
+// Phones: give the PDF downloads their own full-width row with proper tap-sized buttons
+@media (max-width: 575.98px) {
+  .post-title .cv-pdf-buttons {
+    float: none !important;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+
+    .btn {
+      flex: 1;
+      margin-left: 0 !important;
+      padding: 0.55rem 0.5rem;
+      font-size: 0.95rem;
+    }
+  }
+}
