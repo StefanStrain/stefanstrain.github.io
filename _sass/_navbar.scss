@@ -188,3 +188,43 @@
     color: var(--global-hover-color);
   }
 }
+
+// Quick links shown next to the toggle on phones, so key pages don't hide behind the menu
+.navbar-mobile-links {
+  flex-direction: row;
+
+  .nav-item .nav-link {
+    padding: 0.5rem 0.45rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar.navbar-light .navbar-brand {
+    margin-right: 0.5rem;
+  }
+
+  .navbar-mobile-links + .navbar-toggler {
+    margin-left: 0.25rem !important;
+  }
+
+  // Already shown as quick links, no need to repeat them in the menu
+  .navbar .navbar-collapse .nav-item.mobile-hidden {
+    display: none;
+  }
+}
+
+// Very narrow phones (e.g. 320px): tighten so everything stays on one row
+@media (max-width: 374.98px) {
+  .navbar.navbar-light .navbar-brand {
+    font-size: 1rem;
+    margin-right: 0.25rem;
+  }
+
+  .navbar-mobile-links .nav-item .nav-link {
+    padding: 0.5rem 0.3rem;
+  }
+
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem;
+  }
+}

@@ -4,6 +4,7 @@ permalink: /cv/
 title: cv
 nav: true
 nav_order: 5
+nav_mobile: true
 cv_format: jsonresume
 cv_pdfs:
   - label: English CV
