@@ -1,0 +1,48 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { entryLang, entrySlug, localePath, useTranslations } from '../i18n';
+import { readingMinutes } from '../i18n/content';
+import 'katex/dist/katex.min.css';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const lang = entryLang(project.id);
+const slug = entrySlug(project.id);
+const t = useTranslations(lang);
+const { title, description, img, tags } = project.data;
+const { Content } = await render(project);
+---
+
+<Base lang={lang} title={title} description={description}>
+  <article>
+    <header class="mx-auto max-w-4xl px-4 pt-36 sm:px-8" data-hero>
+      <a href={localePath(lang, '/projects/')} class="text-sm text-muted transition-colors hover:text-accent">
+        {t('projects.back')}
+      </a>
+      <h1 class="mt-6 text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.02] font-medium" transition:name={`project-title-${slug}`}>
+        {title}
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-muted" data-reveal>{description}</p>
+      <p class="mt-4 text-sm tracking-wide text-muted" data-reveal>{readingMinutes(project.body)} {t('projects.readingTime')}</p>
+      <ul class="mt-6 flex flex-wrap gap-2" data-reveal>
+        {tags.map((tag) => <li class="rounded-full border border-line px-2.5 py-1 text-xs text-muted">{tag}</li>)}
+      </ul>
+    </header>
+    <div class="mx-auto mt-14 max-w-5xl px-4 sm:px-8">
+      <img
+        src={`/${img}`}
+        alt=""
+        class:list={['aspect-[16/9] w-full rounded-xl border border-line', img.endsWith('.svg') ? 'object-contain' : 'object-cover']}
+        transition:name={`project-img-${slug}`}
+      />
+    </div>
+    <div class="prose-ink mx-auto mt-16 max-w-3xl px-4 sm:px-8">
+      <Content />
+    </div>
+  </article>
+</Base>

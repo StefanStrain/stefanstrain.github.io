@@ -1,0 +1,117 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Glow from '../components/Glow.astro';
+import GridBackdrop from '../components/GridBackdrop.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { localePath, useTranslations, type Lang } from '../i18n';
+import { getProfile, getProjects } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const profileEntry = await getProfile(lang);
+const profile = profileEntry.data;
+const { Content: Bio } = await render(profileEntry);
+const projects = await getProjects(lang);
+---
+
+<Base lang={lang}>
+  <section class="relative isolate overflow-hidden" data-hero data-spotlight>
+    <GridBackdrop />
+    <Glow />
+    <div class="mx-auto flex min-h-[88dvh] max-w-6xl flex-col justify-end px-4 pt-32 pb-20 sm:px-8" data-hero-content>
+      <h1 class="text-[clamp(2.8rem,9vw,7.5rem)] leading-[0.98] font-medium" data-split>
+        <span class="line"><span>{t('home.headline.1')}</span></span>
+        <span class="line"><span>{t('home.headline.2')}</span></span>
+      </h1>
+      <p class="mt-8 max-w-xl text-lg text-muted" data-reveal data-delay="0.5">
+        {t('home.intro')} {profile.location}.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-8">
+    <div class="flex items-baseline justify-between border-b border-line pb-4" data-reveal data-rule>
+      <h2 class="text-sm font-medium tracking-[0.12em] text-muted uppercase">{t('home.selected')}</h2>
+      <a href={localePath(lang, '/projects/')} class="text-sm text-muted transition-colors hover:text-accent">
+        {t('home.allProjects')}
+      </a>
+    </div>
+    <div class="mt-10 grid gap-x-8 gap-y-16 md:grid-cols-2">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <!-- The photo dissolves into the page instead of sitting in a frame; he looks right, towards the text -->
+  <!-- On desktop it stays put while the bio scrolls past it -->
+  <section class="relative isolate mt-40 overflow-x-clip">
+    <div class="mx-auto grid max-w-6xl px-4 sm:px-8 md:grid-cols-[5fr_7fr] md:gap-12">
+    <div>
+      <div
+        class="about-photo pointer-events-none relative -z-10 -mb-12 md:sticky md:top-12 md:mb-0 md:-ml-40 md:w-[40rem]"
+        data-reveal
+      >
+        <img src={`/${profile.photo}`} alt={profile.name} loading="lazy" class="w-full" />
+      </div>
+    </div>
+    <div class="md:py-24">
+      <h2 class="border-b border-line pb-4 text-sm font-medium tracking-[0.12em] text-muted uppercase" data-reveal data-rule>{t('home.about')}</h2>
+      <div class="prose-ink mt-6 text-lg" data-reveal>
+        <Bio />
+      </div>
+      <ul class="mt-10 flex flex-wrap gap-2" data-reveal>
+        {profile.languages.map((l) => <li class="rounded-full border border-line px-3 py-1.5 text-sm text-muted">{l}</li>)}
+      </ul>
+    </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Three soft blobs drift slowly against each other, so the edge of the photo is never a clean circle */
+  @property --b1x { syntax: '<percentage>'; inherits: false; initial-value: 52%; }
+  @property --b1y { syntax: '<percentage>'; inherits: false; initial-value: 34%; }
+  @property --b2x { syntax: '<percentage>'; inherits: false; initial-value: 38%; }
+  @property --b2y { syntax: '<percentage>'; inherits: false; initial-value: 58%; }
+  @property --b3x { syntax: '<percentage>'; inherits: false; initial-value: 64%; }
+  @property --b3y { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+
+  .about-photo {
+    /* a long, eased falloff so there is no visible rim */
+    --fade: #000 0%, rgb(0 0 0 / 0.7) 18%, rgb(0 0 0 / 0.38) 40%, rgb(0 0 0 / 0.14) 62%, transparent 88%;
+    mask-image:
+      radial-gradient(ellipse 62% 54% at var(--b1x) var(--b1y), var(--fade)),
+      radial-gradient(ellipse 52% 62% at var(--b2x) var(--b2y), var(--fade)),
+      radial-gradient(ellipse 46% 50% at var(--b3x) var(--b3y), var(--fade));
+    animation: blob 22s ease-in-out infinite alternate;
+  }
+  /* the blobs reach the edges of the photo, so the photo itself also fades out before its own border */
+  .about-photo img {
+    filter: saturate(0.9);
+    mask-image:
+      linear-gradient(to right, transparent, #000 15%, #000 55%, transparent 92%),
+      linear-gradient(to bottom, transparent, #000 18%, #000 62%, transparent 95%);
+    mask-composite: intersect;
+  }
+  /* The photo's bright ceiling would glare against the dark page */
+  :global([data-theme='dark']) .about-photo img {
+    filter: saturate(0.85) brightness(0.82);
+  }
+  @keyframes blob {
+    to {
+      --b1x: 58%;
+      --b1y: 30%;
+      --b2x: 34%;
+      --b2y: 50%;
+      --b3x: 60%;
+      --b3y: 60%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-photo { animation: none; }
+  }
+</style>

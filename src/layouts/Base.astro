@@ -1,0 +1,137 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { languages, switchPath, useTranslations, type Lang } from '../i18n';
+import '../styles/global.css';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { lang, title } = Astro.props;
+const t = useTranslations(lang);
+const description = Astro.props.description ?? t('meta.description');
+const fullTitle = title ? `${title} · Stefan Strainovic` : 'Stefan Strainovic';
+
+// Link previews (Open Graph / Twitter) and structured data for search engines
+const site = Astro.site ?? new URL('https://stefanstrainovic.com');
+const pageUrl = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL(Astro.props.image ?? '/og-default.png', site).href;
+const ogLocales: Record<Lang, string> = { en: 'en_GB', fr: 'fr_FR' };
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Stefan Strainovic',
+  jobTitle: t('meta.jobTitle'),
+  url: new URL(lang === 'en' ? '/' : `/${lang}/`, site).href,
+  sameAs: [
+    'https://github.com/StefanStrain',
+    'https://www.linkedin.com/in/stefanstrainovic',
+    'https://www.kaggle.com/stefanstrainovic',
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {
+      (Object.keys(languages) as Lang[]).map((l) => (
+        <link rel="alternate" hreflang={l} href={new URL(switchPath(Astro.url, l), Astro.site)} />
+      ))
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stefan Strainovic" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Stefan Strainovic, statistician & data scientist" />
+    <meta property="og:locale" content={ogLocales[lang]} />
+    {
+      (Object.keys(languages) as Lang[])
+        .filter((l) => l !== lang)
+        .map((l) => <meta property="og:locale:alternate" content={ogLocales[l]} />)
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0c1516" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!--
+      Runs before first paint: picks the theme (dark unless the visitor chose light) and marks JS as available,
+      so [data-reveal] elements are only hidden when the motion script is there to show them again.
+      ClientRouter replaces <html> attributes on navigation, so both are reapplied after every swap.
+    -->
+    <script is:inline>
+      (function () {
+        function prepare() {
+          var theme = null;
+          try { theme = localStorage.getItem('theme'); } catch (e) {}
+          document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+          document.documentElement.classList.add('js');
+        }
+        prepare();
+        document.addEventListener('astro:after-swap', prepare);
+      })();
+    </script>
+    <!--
+      GoatCounter (cookieless analytics). ClientRouter navigations never reload the page, so the automatic count is
+      switched off and every page, the first included, is counted on astro:page-load. count.js itself skips
+      localhost and browsers where localStorage 'skipgc' is 't'.
+    -->
+    <script
+      is:inline
+      data-goatcounter="https://stefanstrain.goatcounter.com/count"
+      data-goatcounter-settings='{"no_onload": true}'
+      async
+      src="https://gc.zgo.at/count.js"></script>
+    <script is:inline>
+      document.addEventListener('astro:page-load', function () {
+        function send() { window.goatcounter.count({ path: location.pathname + location.search }); }
+        if (window.goatcounter && window.goatcounter.count) send();
+        else document.querySelector('script[data-goatcounter]').addEventListener('load', send, { once: true });
+      });
+    </script>
+    <ClientRouter />
+  </head>
+  <body class="min-h-dvh bg-bg text-ink">
+    <a
+      href="#main"
+      class="fixed top-3 left-3 z-[60] -translate-y-20 rounded-full bg-accent px-4 py-2 text-sm text-bg transition-transform focus:translate-y-0"
+    >
+      {t('a11y.skip')}
+    </a>
+    <Nav lang={lang} />
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      import '../scripts/motion.ts';
+      import '../scripts/theme.ts';
+    </script>
+  </body>
+</html>

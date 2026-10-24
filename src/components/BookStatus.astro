@@ -1,0 +1,17 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  status?: string;
+  lang: Lang;
+}
+
+// Only unusual statuses get a badge; finished books are the default and stay quiet
+const badges = { paused: 'books.status.paused', reread: 'books.status.reread' } as const;
+
+const { status, lang } = Astro.props;
+const t = useTranslations(lang);
+const key = badges[(status ?? '').toLowerCase() as keyof typeof badges];
+---
+
+{key && <span class="inline-block rounded-full border border-accent/40 px-2.5 py-0.5 text-[0.7rem] text-accent">{t(key)}</span>}

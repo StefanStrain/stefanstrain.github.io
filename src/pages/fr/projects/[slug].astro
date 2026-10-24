@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectPage from '../../../views/ProjectPage.astro';
+import { entryLang, entrySlug } from '../../../i18n';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('projects', ({ id }) => entryLang(id) === 'fr');
+  return entries.map((entry) => ({ params: { slug: entrySlug(entry.id) }, props: { entry } }));
+}
+---
+
+<ProjectPage project={Astro.props.entry} />

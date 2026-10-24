@@ -1,0 +1,443 @@
+{
+  "basics": {
+    "name": "Stefan Strainovic",
+    "label": "Statisticien et data scientist",
+    "image": "CV-Photo.jpg",
+    "email": "stefan.strain@outlook.com",
+    "phone": "06 05 02 23 14",
+    "url": "https://stefanstrainovic.com/fr/",
+    "summary": "Statisticien et data scientist titulaire d'un master en statistique appliquée, spécialisé dans la conception et le déploiement de modèles de machine learning. J'applique le machine learning et le deep learning à des problèmes complexes en finance (risque de crédit) comme en recherche biomédicale (oncologie, imagerie médicale). Passionné par l'optimisation et par l'idée de faire des données un vrai levier d'impact dans des environnements qui bougent vite.",
+    "location": {
+      "address": "",
+      "postalCode": "75008",
+      "city": "Paris",
+      "countryCode": "FR",
+      "region": "Île-de-France"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "StefanStrain",
+        "url": "https://github.com/StefanStrain"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "stefanstrainovic",
+        "url": "https://www.linkedin.com/in/stefanstrainovic"
+      },
+      {
+        "network": "Kaggle",
+        "username": "stefanstrainovic",
+        "url": "https://www.kaggle.com/stefanstrainovic"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Stealth Startup",
+      "location": "Paris, France",
+      "position": "Ingénieur fondateur et Lead AI/ML Engineer (temps partiel)",
+      "startDate": "2025-05-01",
+      "endDate": "2026-01-01",
+      "summary": "Piloté le développement d'une plateforme d'IA multimodale de dépistage de santé non invasif, au sein d'une startup autofinancée.",
+      "highlights": [
+        "Conçu et construit un modèle multimodal de dépistage vocal en santé qui transforme des enregistrements audio et leurs transcriptions en scores cliniques, à l'aide d'architectures d'encodeurs à attention.",
+        "Développé un pipeline Python de bout en bout combinant l'extraction de features acoustiques (prosodie, pauses, énergie, caractéristiques spectrales), l'analyse linguistique et des embeddings issus de Transformers.",
+        "Intégré la reconnaissance automatique de la parole, le feature engineering, l'entraînement et la validation des modèles dans un système prêt pour la production, avec déploiement continu et suivi des expériences."
+      ]
+    },
+    {
+      "name": "Karmen",
+      "location": "Paris, France",
+      "position": "Stagiaire Machine Learning Engineer (risque de crédit)",
+      "url": "https://www.karmen.io/",
+      "startDate": "2024-07-01",
+      "endDate": "2025-01-01",
+      "summary": "Développé et déployé des systèmes de machine learning en production pour l'évaluation du risque de crédit, en automatisant des processus financiers à grande échelle.",
+      "highlights": [
+        "Construit des modèles d'ensemble de risque de crédit (XGBoost, Random Forest) au-delà du 90e centile de précision, et déployé un moteur de scoring de niveau production via Streamlit pour les décisions de crédit.",
+        "Conçu un système automatique de classification des transactions basé sur TF-IDF et l'analyse sémantique, capable de traiter et labelliser des milliers de transactions avec très peu d'intervention manuelle.",
+        "Conçu un algorithme de priorisation des transactions basé sur le clustering k-means, réduisant la labellisation manuelle de 95 %, de plusieurs milliers à environ 200 transactions par client et par cycle.",
+        "Prototypé un système d'extraction de documents basé sur des CNN pour lire automatiquement les relevés bancaires à partir d'images PDF, ouvrant la voie à une ingestion de documents de bout en bout.",
+        "Mis en place des tableaux de bord de suivi des modèles et des pipelines de validation automatiques, pour garantir la fiabilité des modèles et détecter la dérive en production."
+      ]
+    },
+    {
+      "name": "Ensicaen (CNRS & Cyceron)",
+      "location": "Caen, France",
+      "position": "Stagiaire statisticien (recherche en oncologie)",
+      "url": "https://www.cyceron.fr/index.php/fr/",
+      "startDate": "2023-03-01",
+      "endDate": "2023-07-01",
+      "summary": "Conçu et mené l'analyse statistique d'une recherche en radio-oncologie sur les effets immunologiques de différents protocoles d'irradiation cérébrale.",
+      "highlights": [
+        "Quantifié par une analyse statistique rigoureuse l'impact différentiel de l'irradiation cérébrale par rayons X et par protons sur les sous-types de globules blancs (lymphocytes T CD4+, CD8+ et Treg).",
+        "Développé des modèles de régression multivariée, avec validation diagnostique, pour identifier les corrélations significatives entre protocoles d'irradiation et concentrations de lymphocytes.",
+        "Produit des rapports statistiques et des visualisations de qualité publication, pour rendre des résultats immunologiques complexes lisibles par les équipes cliniques et de recherche."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Université de Caen Normandie",
+      "location": "Caen, France",
+      "url": "https://uniform.unicaen.fr/catalogue/formation/m/7147-master-mathematiques-appliquees--statistiques?s=trouver-sa-formation&e=FI",
+      "area": "statistique appliquée",
+      "studyType": "Master",
+      "startDate": "",
+      "endDate": "2024",
+      "score": "10",
+      "courses": [
+        "<strong>Théorie et méthodologie statistiques :</strong> formation rigoureuse en analyse de données multivariées, classification, modèles de régression et séries temporelles, pour la prévision et la modélisation de processus stochastiques.",
+        "<strong>Implémentation de modèles et d'algorithmes statistiques :</strong> mise en œuvre avec des logiciels statistiques (Python, R et SAS), avec un accent sur la recherche opérationnelle, l'optimisation discrète et le machine learning.",
+        "<strong>Stages et projets :</strong> stages en recherche statistique (oncologie) et en machine learning (finance), ainsi que des projets personnels de deep learning appliqué à l'imagerie médicale."
+      ]
+    },
+    {
+      "institution": "Université Paris Diderot (Paris 7)",
+      "location": "Paris, France",
+      "url": "https://licence.math.u-paris.fr/formations/math/l3-math-fonda/",
+      "area": "mathématiques fondamentales et appliquées",
+      "studyType": "Licence",
+      "startDate": "",
+      "endDate": "2022",
+      "score": "10",
+      "courses": [
+        "<strong>Mathématiques fondamentales et appliquées :</strong> des bases solides en algèbre, analyse, équations différentielles et optimisation.",
+        "<strong>Modélisation numérique et probabiliste :</strong> probabilités, statistique et analyse numérique, complétées par la programmation et l'algorithmique.",
+        "<strong>Apprentissage par projets :</strong> plusieurs projets mathématiques et préprofessionnels menés à bien, pour appliquer la théorie à des problèmes concrets et développer la recherche et la résolution de problèmes."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Classification de tumeurs cérébrales par CNN",
+      "summary": "Développé un modèle de machine learning qui classe les tumeurs cérébrales à partir d'IRM, avec 98 % de précision. Ce projet a été ma porte d'entrée dans le deep learning et la vision par ordinateur.",
+      "highlights": [
+        "Mis en œuvre des réseaux de neurones convolutifs (CNN) pour la classification d'images.",
+        "Utilisé le transfert d'apprentissage avec des modèles pré-entraînés comme VGG16 et VGG19.",
+        "Appliqué de la data augmentation pour diversifier le jeu de données et limiter le surapprentissage."
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2023-03-01",
+      "url": ""
+    },
+    {
+      "name": "Hackathon : classification génomique de bactériophages",
+      "summary": "Participé à un hackathon de biologie pour construire un modèle de classification de séquences génomiques de bactériophages.",
+      "highlights": [
+        "Fine-tuné un grand modèle de langage (LLM) sur des données génétiques pour identifier quelles séquences correspondent à quels composants du phage (tête, col, queue).",
+        "Collaboré en équipe sur le pré-traitement des données génomiques et l'entraînement du modèle pour une classification précise."
+      ],
+      "startDate": "2024-06-01",
+      "endDate": "2024-06-01",
+      "url": ""
+    },
+    {
+      "name": "Hackathon : prédire le déclin cognitif dans la démence",
+      "summary": "Développé un modèle d'ensemble qui prédit le déclin cognitif à partir de données audio et textuelles de patients.",
+      "highlights": [
+        "Extrait des features prosodiques (hauteur, ton, durée des pauses) des fichiers audio.",
+        "Construit un modèle d'ensemble combinant un LLM de type BERT pour le texte et un MLP pour l'audio et le sentiment.",
+        "Le modèle final classe les patients et peut servir à suivre l'évolution de la démence dans le temps."
+      ],
+      "startDate": "2024-07-01",
+      "endDate": "2024-07-01",
+      "url": ""
+    }
+  ],
+  "skills": [
+    {
+      "name": "Langages et outils de base",
+      "level": "Avancé",
+      "icon": "fa-solid fa-code",
+      "subSkills": [
+        {
+          "name": "Python",
+          "items": [
+            "<strong>Calcul scientifique :</strong> NumPy, pandas, SciPy, polars",
+            "<strong>Visualisation de données :</strong> matplotlib, seaborn, plotly, Altair",
+            "<strong>Machine learning et deep learning :</strong> scikit-learn, PyTorch, TensorFlow, Transformers",
+            "<strong>Applications de données et API :</strong> Streamlit, FastAPI, Pydantic",
+            "<strong>Programmation probabiliste et statistique :</strong> statsmodels",
+            "<strong>Qualité du code :</strong> pytest, black",
+            "<strong>Environnements :</strong> JupyterLab, Jupyter Notebook, VS Code"
+          ]
+        },
+        {
+          "name": "R",
+          "items": [
+            "<strong>Manipulation de données :</strong> Tidyverse, data.table, ggplot2",
+            "<strong>Machine learning :</strong> tidymodels, caret"
+          ]
+        },
+        {
+          "name": "SQL",
+          "items": [
+            "<strong>Fondamentaux :</strong> SQL ANSI, fonctions de fenêtrage, CTE",
+            "<strong>Performance :</strong> plans d'exécution, optimisation, UDF",
+            "<strong>Analytique :</strong> funnels, cohortes, churn/LTV, tables de KPI"
+          ]
+        },
+        {
+          "name": "Shell et scripts",
+          "items": [
+            "Bash/zsh"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Machine learning et IA",
+      "level": "Avancé",
+      "icon": "fa-solid fa-robot",
+      "subSkills": [
+        {
+          "name": "Machine learning classique",
+          "items": [
+            "<strong>Apprentissage supervisé :</strong> régression linéaire et logistique, arbres, méthodes d'ensemble (RF, XGBoost, LightGBM), SVM, k-NN",
+            "<strong>Apprentissage non supervisé :</strong> k-means, DBSCAN, ACP, t-SNE/UMAP, modèles de mélange",
+            "<strong>Feature engineering :</strong> analyse exploratoire, encodage, features d'interaction, validation croisée temporelle",
+            "<strong>Maîtrise des fuites de données :</strong> stratégies de validation",
+            "<strong>Évaluation :</strong> validation croisée, calibration, gestion du déséquilibre des classes"
+          ]
+        },
+        {
+          "name": "Deep learning",
+          "items": [
+            "<strong>Fondamentaux :</strong> rétropropagation, initialisation, optimiseurs (SGD, Adam), précision mixte, mécanismes d'attention",
+            "<strong>Architectures :</strong> MLP, CNN (2D/3D), RNN/LSTM, Transformers, architectures encodeur-décodeur",
+            "<strong>Vision par ordinateur :</strong> classification d'images, détection d'objets, segmentation, data augmentation, OCR et extraction de documents",
+            "<strong>Bibliothèques de vision :</strong> OpenCV, PIL",
+            "<strong>Transfert d'apprentissage :</strong> modèles pré-entraînés, fine-tuning",
+            "<strong>Imagerie médicale :</strong> U-Net, nnU-Net, CNN 3D, formats DICOM/NIfTI, MONAI",
+            "<strong>Robustesse :</strong> adaptation de domaine, augmentation au moment du test"
+          ]
+        },
+        {
+          "name": "NLP et grands modèles de langage",
+          "items": [
+            "<strong>NLP classique :</strong> tokenisation, TF-IDF, embeddings, analyse de sentiment, NER",
+            "<strong>Transformers :</strong> fine-tuning de BERT, instruction tuning, prompt engineering",
+            "<strong>Avancé :</strong> génération augmentée par la recherche (RAG)"
+          ]
+        },
+        {
+          "name": "Traitement de la parole et de l'audio",
+          "items": [
+            "<strong>Reconnaissance vocale :</strong> Whisper, WhisperX, pipelines ASR",
+            "<strong>Features acoustiques :</strong> prosodie (hauteur, durée), jitter/shimmer, mesures de pauses",
+            "<strong>Analyse spectrale :</strong> spectrogrammes, MFCC, CNN et Transformers temporels",
+            "<strong>Bibliothèques audio :</strong> librosa"
+          ]
+        },
+        {
+          "name": "Sujets avancés",
+          "items": [
+            "<strong>Inférence causale :</strong> DAG, appariement par score de propension",
+            "<strong>Expérimentation :</strong> tests A/B/n, analyse de puissance",
+            "<strong>Interprétabilité :</strong> importance par permutation, SHAP",
+            "<strong>Apprentissage multimodal :</strong> fusion audio-texte, deep learning d'ensemble",
+            "<strong>Détection d'anomalies</strong>"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data engineering et outils",
+      "level": "Avancé",
+      "icon": "fa-solid fa-server",
+      "subSkills": [
+        {
+          "name": "Bases de données et entrepôts",
+          "items": [
+            "<strong>Relationnel :</strong> PostgreSQL, MySQL, SQLite",
+            "<strong>Formats de données :</strong> Parquet, CSV, JSON, HDF5, Zarr"
+          ]
+        },
+        {
+          "name": "Orchestration et ETL",
+          "items": [
+            "<strong>Transformation de données :</strong> dbt (modèles, tests, exposures)"
+          ]
+        },
+        {
+          "name": "Suivi et déploiement des modèles",
+          "items": [
+            "<strong>Suivi des expériences :</strong> MLflow, AWS SageMaker Experiments",
+            "<strong>Gestion de versions :</strong> Git",
+            "<strong>Conteneurisation :</strong> Docker, Kubernetes",
+            "<strong>CI/CD :</strong> pipelines d'intégration et de déploiement continus",
+            "<strong>Mise en production des modèles :</strong> FastAPI, AWS SageMaker",
+            "<strong>Suivi des modèles :</strong> détection de dérive des données"
+          ]
+        },
+        {
+          "name": "Plateformes cloud",
+          "items": [
+            "<strong>AWS :</strong> EC2, S3, SageMaker"
+          ]
+        },
+        {
+          "name": "Analytique et BI",
+          "items": [
+            "<strong>Tableaux de bord interactifs :</strong> Streamlit, Power BI",
+            "<strong>Tableurs :</strong> Excel, Google Sheets"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mathématiques et statistique",
+      "level": "Avancé",
+      "icon": "fa-solid fa-calculator",
+      "subSkills": [
+        {
+          "name": "Algèbre linéaire et analyse",
+          "items": [
+            "Espaces vectoriels, décomposition spectrale, SVD, calcul matriciel",
+            "Calcul différentiel à plusieurs variables, développements de Taylor, espaces de Hilbert"
+          ]
+        },
+        {
+          "name": "Probabilités et processus stochastiques",
+          "items": [
+            "<strong>Théorie des probabilités :</strong> variables aléatoires, espérances, loi des grands nombres, théorème central limite",
+            "<strong>Processus stochastiques :</strong> chaînes de Markov, processus gaussiens",
+            "<strong>Théorie de l'information :</strong> entropie, divergence de Kullback-Leibler, information mutuelle"
+          ]
+        },
+        {
+          "name": "Inférence statistique",
+          "items": [
+            "<strong>Tests d'hypothèses :</strong> tests du rapport de vraisemblance, p-values, correction des tests multiples",
+            "<strong>Estimation ponctuelle :</strong> maximum de vraisemblance, méthode des moments",
+            "<strong>Méthodes bayésiennes :</strong> inférence a priori et a posteriori, MCMC (HMC/NUTS), inférence variationnelle"
+          ]
+        },
+        {
+          "name": "Régression et méthodes multivariées",
+          "items": [
+            "<strong>Modèles linéaires généralisés :</strong> GLM, GAM, modèles à effets mixtes (GLMM)",
+            "<strong>Réduction de dimension :</strong> ACP",
+            "<strong>Diagnostics :</strong> analyse des résidus, diagnostics d'influence, tests d'hétéroscédasticité"
+          ]
+        },
+        {
+          "name": "Séries temporelles et prévision",
+          "items": [
+            "<strong>Méthodes classiques :</strong> ARIMA, SARIMA, lissage exponentiel",
+            "<strong>Analyse spectrale :</strong> FFT, estimation de densité spectrale"
+          ]
+        },
+        {
+          "name": "Optimisation",
+          "items": [
+            "<strong>Optimisation convexe :</strong> variantes de la descente de gradient, méthodes proximales"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Expertise métier",
+      "level": "Avancé",
+      "icon": "fa-solid fa-star",
+      "subSkills": [
+        {
+          "name": "Médical et biomédical",
+          "items": [
+            "<strong>Imagerie médicale :</strong> IRM, scanner, radiothérapie par rayons X et protonthérapie",
+            "<strong>Oncologie et immunologie :</strong> biomarqueurs, critères de réponse au traitement, dynamique des lymphocytes",
+            "<strong>Génomique :</strong> formats FASTA/FASTQ, Biopython, analyse de séquences"
+          ]
+        },
+        {
+          "name": "Finance et risque",
+          "items": [
+            "<strong>Risque de crédit :</strong> modèles d'évaluation du risque, systèmes de scoring",
+            "<strong>Analyse de transactions :</strong> classification, détection de motifs, identification d'anomalies"
+          ]
+        },
+        {
+          "name": "Analytique produit et croissance",
+          "items": [
+            "<strong>Conception de métriques :</strong> définition de KPI, schémas d'événements, dictionnaires de données",
+            "<strong>Analytique produit :</strong> analyse de funnels, cohortes, courbes de rétention, churn et valeur vie client",
+            "<strong>Expérimentation :</strong> conception de tests A/B, rigueur statistique à l'échelle d'un produit"
+          ]
+        },
+        {
+          "name": "Recherche et méthode scientifique",
+          "items": [
+            "<strong>Recherche :</strong> revue de littérature, pratiques de recherche reproductible",
+            "<strong>Communication :</strong> rédaction d'articles de recherche, conseil statistique auprès d'experts métier"
+          ]
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Anglais",
+      "fluency": "Langue maternelle (niveau C2)"
+    },
+    {
+      "language": "Français",
+      "fluency": "Courant (niveau C1-C2)"
+    },
+    {
+      "language": "Serbo-croate",
+      "fluency": "Langue maternelle (niveau C2)"
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Erasmus Student Network (ESN) Paris",
+      "position": "Administrateur",
+      "startDate": "2024-09-01",
+      "endDate": "Present",
+      "summary": "Membre actif du bureau de la section locale ESN, je participe à l'organisation d'événements pour les étudiants internationaux."
+    },
+    {
+      "organization": "Erasmus Student Network (ESN) Caen",
+      "position": "Représentant régional et organisateur d'événements",
+      "startDate": "2023-01-01",
+      "endDate": "2024-06-01",
+      "summary": "Organisé des événements et des activités pour les étudiants internationaux, et représenté la section de Caen au niveau régional."
+    },
+    {
+      "organization": "Gazamo Inc.",
+      "position": "Artiste principal et chef de projet / producteur",
+      "startDate": "2018-01-01",
+      "endDate": "2022-01-01",
+      "summary": "À la fois artiste et manager d'une équipe internationale d'artistes en télétravail, pour la création d'assets numériques destinés au jeu vidéo.",
+      "highlights": [
+        "Créé des assets graphiques tout en encadrant et en accompagnant d'autres artistes, ce qui donnait un regard unique à la fois sur la direction artistique et sur la gestion.",
+        "Élaboré des plans de projet, défini les périmètres et les objectifs, et piloté les plannings pour tenir les jalons.",
+        "Supervisé le pipeline artistique et de production, en contribuant au contenu comme au pilotage pour garantir la qualité et la cohérence."
+      ]
+    }
+  ],
+  "interests": [
+    {
+      "name": "Loisirs créatifs",
+      "icon": "fa-solid fa-palette",
+      "keywords": [
+        "<strong>Sculpture par ajout</strong> (métal, argile, polymère)",
+        "<strong>Taille et sculpture par retrait</strong> (bois, livres, cire)",
+        "<strong>Gravure</strong> (verre, métal)",
+        "<strong>Bricolage électronique</strong> (Arduino)",
+        "<strong>Arts textiles</strong> (tricot, crochet)"
+      ]
+    },
+    {
+      "name": "Lecture",
+      "icon": "fa-solid fa-book",
+      "keywords": [
+        "<strong>Sciences comportementales et psychologie</strong>",
+        "<strong>Neurosciences et biologie</strong>",
+        "<strong>Fiction</strong> (science-fiction, fantasy, policier)"
+      ]
+    }
+  ]
+}

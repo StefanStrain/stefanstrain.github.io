@@ -1,0 +1,62 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Stars from '../components/Stars.astro';
+import BookStatus from '../components/BookStatus.astro';
+import { dateLocale, entryLang, entrySlug, localePath, useTranslations } from '../i18n';
+
+interface Props {
+  book: CollectionEntry<'books'>;
+}
+
+const { book } = Astro.props;
+const lang = entryLang(book.id);
+const t = useTranslations(lang);
+const { title, author, cover, stars, released, finished, buy_link, categories } = book.data;
+const { Content } = await render(book);
+---
+
+<Base lang={lang} title={title} description={`${title} ${t('books.by')} ${author}, ${t('books.review')}`}>
+  <article class="mx-auto grid max-w-5xl gap-12 px-4 pt-36 sm:px-8 md:grid-cols-[16rem_1fr]" data-hero>
+    <div>
+      <a href={localePath(lang, '/books/')} class="text-sm text-muted transition-colors hover:text-accent">{t('books.back')}</a>
+      <img
+        src={`/${cover}`}
+        alt={`${t('books.cover')} ${title}`}
+        class="mt-6 aspect-[2/3] w-full max-w-64 rounded-lg object-cover"
+        transition:name={`book-cover-${entrySlug(book.id)}`}
+      />
+    </div>
+    <div class="md:pt-12">
+      <h1 class="text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-medium">{title}</h1>
+      <p class="mt-3 text-lg text-muted" data-reveal>
+        {author}{released && ` · ${released}`}
+      </p>
+      <div class="mt-4 flex items-center gap-4" data-reveal>
+        {stars && <Stars value={stars} lang={lang} />}
+        <BookStatus status={book.data.status} lang={lang} />
+        {
+          finished && (
+            <span class="text-sm text-muted">
+              {t('books.read')} {finished.toLocaleDateString(dateLocale(lang), { month: 'long', year: 'numeric' })}
+            </span>
+          )
+        }
+      </div>
+      <div class="prose-ink mt-10 text-lg" data-reveal>
+        <Content />
+      </div>
+      <ul class="mt-10 flex flex-wrap gap-2" data-reveal>
+        {categories.map((c) => <li class="rounded-full border border-line px-2.5 py-1 text-xs text-muted">{c}</li>)}
+      </ul>
+      {
+        buy_link && (
+          <a href={buy_link} target="_blank" rel="noopener" class="mt-8 inline-block text-sm text-accent hover:underline" data-reveal>
+            {t('books.find')}
+          </a>
+        )
+      }
+    </div>
+  </article>
+</Base>

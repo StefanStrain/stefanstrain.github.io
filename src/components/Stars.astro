@@ -1,0 +1,16 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  value: number;
+  lang: Lang;
+  class?: string;
+}
+
+const { value, lang, class: className } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<p class:list={['text-sm tracking-[0.2em]', className]} aria-label={`${value} ${t('books.stars')}`}>
+  <span class="text-accent">{'★'.repeat(value)}</span><span class="text-line">{'★'.repeat(5 - value)}</span>
+</p>

@@ -1,0 +1,350 @@
+---
+// Standalone A4 print layout of the CV: no site chrome, white paper, compact type
+import { dateLocale, localePath, useTranslations, type Lang } from '../i18n';
+import { getProfile, getResume } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const profile = (await getProfile(lang)).data;
+const resume = getResume(lang);
+const { basics } = resume;
+
+function formatDate(date?: string) {
+  if (!date) return '';
+  if (date === 'Present') return t('cv.present');
+  const d = new Date(date);
+  return Number.isNaN(d.getTime()) ? date : d.toLocaleDateString(dateLocale(lang), { month: 'short', year: 'numeric' });
+}
+
+const range = (start?: string, end?: string) => [formatDate(start), formatDate(end)].filter(Boolean).join(' – ');
+const site = (basics.url ?? 'https://stefanstrainovic.com/').replace(/^https?:\/\//, '').replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{`${t('cv.title')} · ${basics.name}`}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style is:global>
+      @page {
+        size: A4;
+        margin: 14mm 15mm;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: #e9e9e6;
+      }
+      body {
+        margin: 0;
+        color: #111;
+        font: 9.6pt/1.4 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 210mm;
+        margin: 0 auto;
+        padding: 16px 0;
+        font-size: 10pt;
+      }
+      .toolbar a {
+        color: #333;
+      }
+      .toolbar button {
+        font: inherit;
+        padding: 6px 14px;
+        border: 1px solid #111;
+        border-radius: 999px;
+        background: #111;
+        color: #fff;
+        cursor: pointer;
+      }
+      .sheet {
+        max-width: 210mm;
+        margin: 0 auto 32px;
+        padding: 14mm 15mm;
+        background: #fff;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+      }
+      header {
+        border-bottom: 1.5px solid #111;
+        padding-bottom: 6pt;
+        margin-bottom: 8pt;
+      }
+      h1 {
+        margin: 0;
+        font-size: 20pt;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+      .label {
+        margin: 1pt 0 4pt;
+        font-size: 11pt;
+        color: #333;
+      }
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2pt 12pt;
+        font-size: 8.8pt;
+        color: #333;
+      }
+      .summary {
+        margin: 0 0 6pt;
+      }
+      h2 {
+        margin: 10pt 0 4pt;
+        padding-bottom: 2pt;
+        border-bottom: 0.75px solid #999;
+        font-size: 9pt;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .entry {
+        margin-bottom: 6pt;
+        break-inside: avoid;
+      }
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12pt;
+      }
+      .entry-head strong {
+        font-weight: 600;
+      }
+      .when {
+        flex-shrink: 0;
+        color: #444;
+        font-size: 8.8pt;
+        text-align: right;
+      }
+      .org {
+        color: #333;
+        font-style: italic;
+      }
+      ul {
+        margin: 2pt 0 0;
+        padding-left: 12pt;
+      }
+      li {
+        margin: 0.5pt 0;
+      }
+      p {
+        margin: 2pt 0 0;
+      }
+      .skills {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4pt 16pt;
+      }
+      .skills h3 {
+        margin: 0;
+        font-size: 9.6pt;
+        font-weight: 600;
+      }
+      .skills ul {
+        list-style: none;
+        padding: 0;
+        color: #222;
+        font-size: 9pt;
+      }
+      .skills .sub {
+        color: #444;
+        font-style: italic;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16pt;
+        break-inside: avoid;
+      }
+      .split ul {
+        list-style: none;
+        padding: 0;
+      }
+      @media print {
+        html {
+          background: #fff;
+        }
+        .toolbar {
+          display: none;
+        }
+        .sheet {
+          max-width: none;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+        }
+      }
+      @media (max-width: 640px) {
+        .toolbar,
+        .sheet {
+          margin-left: 16px;
+          margin-right: 16px;
+        }
+        .sheet {
+          padding: 20px 16px;
+        }
+        .skills,
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <a href={localePath(lang, '/cv/')}>{t('cv.back')}</a>
+      <button type="button" onclick="window.print()">{t('cv.print')}</button>
+    </div>
+
+    <main class="sheet">
+      <header>
+        <h1>{basics.name}</h1>
+        <p class="label">{t('meta.jobTitle')}</p>
+        <div class="contact">
+          <span>{profile.location}</span>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <a href={basics.url}>{site}</a>
+          {basics.profiles.map((p) => <a href={p.url}>{p.url.replace(/^https?:\/\/(www\.)?/, '')}</a>)}
+        </div>
+      </header>
+
+      <p class="summary">{basics.summary}</p>
+
+      <section>
+        <h2>{t('cv.experience')}</h2>
+        {
+          resume.work.map((job) => (
+            <div class="entry">
+              <div class="entry-head">
+                <span>
+                  <strong>{job.position}</strong> · <span class="org">{job.name}</span>
+                </span>
+                <span class="when">
+                  {range(job.startDate, job.endDate)}
+                  {job.location && <>, {job.location}</>}
+                </span>
+              </div>
+              {job.summary && <p>{job.summary}</p>}
+              {job.highlights?.length > 0 && (
+                <ul>
+                  {job.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>{t('cv.education')}</h2>
+        {
+          resume.education.map((school) => (
+            <div class="entry">
+              <div class="entry-head">
+                <span>
+                  <strong>
+                    {school.studyType} {t('cv.in')} {school.area}
+                  </strong>{' '}
+                  · <span class="org">{school.institution}</span>
+                </span>
+                <span class="when">{school.endDate}</span>
+              </div>
+              {school.courses?.length > 0 && (
+                <ul>
+                  {school.courses.map((c) => (
+                    <li set:html={c} />
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>{t('cv.skills')}</h2>
+        <div class="skills">
+          {
+            resume.skills.map((group) => (
+              <div class="entry">
+                <h3>{group.name}</h3>
+                <ul>
+                  {group.subSkills.map((sub) => (
+                    <li>
+                      <span class="sub">{sub.name}:</span> <span set:html={sub.items.join(', ')} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      {
+        resume.volunteer.length > 0 && (
+          <section>
+            <h2>{t('cv.volunteering')}</h2>
+            {resume.volunteer.map((v) => (
+              <div class="entry">
+                <div class="entry-head">
+                  <span>
+                    <strong>{v.position}</strong> · <span class="org">{v.organization}</span>
+                  </span>
+                  <span class="when">{range(v.startDate, v.endDate)}</span>
+                </div>
+                {v.summary && <p>{v.summary}</p>}
+              </div>
+            ))}
+          </section>
+        )
+      }
+
+      <div class="split">
+        <section>
+          <h2>{t('cv.languages')}</h2>
+          <ul>
+            {
+              resume.languages.map((l) => (
+                <li>
+                  <strong>{l.language}</strong> · {l.fluency}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+        <section>
+          <h2>{t('cv.interests')}</h2>
+          <ul>
+            {
+              resume.interests.map((i) => (
+                <li>
+                  <strong>{i.name}</strong> · <span set:html={i.keywords.join(', ')} />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

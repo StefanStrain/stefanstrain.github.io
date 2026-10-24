@@ -1,0 +1,31 @@
+---
+import { getProfile } from '../i18n/content';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const profile = (await getProfile(Astro.props.lang)).data;
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-32 border-t border-line">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 text-sm text-muted sm:flex-row sm:items-center sm:px-8"
+  >
+    <a href={`mailto:${profile.email}`} class="font-display bg-linear-to-r from-accent to-accent bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-1 text-lg text-ink transition-[background-size,color] duration-500 ease-out-expo hover:bg-[length:100%_1px] hover:text-accent">
+      {profile.email}
+    </a>
+    <div class="flex gap-5 sm:ml-auto">
+      {
+        Object.entries(profile.socials).map(([name, url]) => (
+          <a href={url} target="_blank" rel="noopener" class="capitalize transition-colors hover:text-ink">
+            {name}
+          </a>
+        ))
+      }
+    </div>
+    <span class="sm:ml-6">© {year}</span>
+  </div>
+</footer>

@@ -1,0 +1,24 @@
+---
+// The one signature effect of direction B: a slow teal glow drifting behind the hero
+---
+
+<div aria-hidden="true" class="glow pointer-events-none absolute -top-40 -right-40 -z-10 size-[34rem] sm:size-[44rem]"></div>
+
+<style>
+  .glow {
+    background: radial-gradient(circle at 30% 30%, var(--glow-a), var(--glow-b) 60%, transparent 70%);
+    filter: blur(80px);
+    opacity: var(--glow-opacity);
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    animation: morph 18s ease-in-out infinite alternate;
+  }
+  @keyframes morph {
+    to {
+      transform: translate(-6rem, 5rem) rotate(40deg);
+      border-radius: 63% 37% 38% 62% / 55% 61% 39% 45%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glow { animation: none; }
+  }
+</style>

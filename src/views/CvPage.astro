@@ -1,0 +1,173 @@
+---
+import Base from '../layouts/Base.astro';
+import { dateLocale, localePath, useTranslations, type Lang } from '../i18n';
+import { getProfile, getResume } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const profile = (await getProfile(lang)).data;
+const resume = getResume(lang);
+
+function formatDate(date?: string) {
+  if (!date) return '';
+  if (date === 'Present') return t('cv.present');
+  const d = new Date(date);
+  return Number.isNaN(d.getTime()) ? date : d.toLocaleDateString(dateLocale(lang), { month: 'short', year: 'numeric' });
+}
+
+const range = (start?: string, end?: string) => [formatDate(start), formatDate(end)].filter(Boolean).join(' – ');
+---
+
+<Base lang={lang} title="CV" description={resume.basics.summary}>
+  <section class="mx-auto max-w-5xl px-4 pt-40 sm:px-8" data-hero>
+    <h1 class="text-[clamp(2.5rem,7vw,5.5rem)] leading-none font-medium" data-split>
+      <span class="line"><span>{t('cv.title')}</span></span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-muted" data-reveal>{resume.basics.summary}</p>
+    <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+      {
+        profile.cv_pdfs.map(({ label, file }) => (
+          <a
+            href={`/${file}`}
+            target="_blank"
+            class="rounded-full border border-accent/50 px-5 py-2.5 text-sm text-accent transition-colors hover:bg-accent hover:text-bg"
+          >
+            {label} (PDF)
+          </a>
+        ))
+      }
+      <a
+        href={localePath(lang, '/cv/print/')}
+        data-astro-reload
+        class="rounded-full border border-line px-5 py-2.5 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
+      >
+        {t('cv.printable')}
+      </a>
+    </div>
+  </section>
+
+  <div class="mx-auto mt-24 max-w-5xl space-y-24 px-4 sm:px-8">
+    <section>
+      <h2 class="border-b border-line pb-4 text-sm font-medium tracking-[0.12em] text-muted uppercase" data-reveal data-rule>
+        {t('cv.experience')}
+      </h2>
+      {
+        resume.work.map((job) => (
+          <div class="grid gap-4 border-b border-line py-10 md:grid-cols-[14rem_1fr]" data-reveal>
+            <p class="text-sm text-muted">
+              {range(job.startDate, job.endDate)}
+              <br />
+              {job.location}
+            </p>
+            <div>
+              <h3 class="text-xl">{job.position}</h3>
+              <p class="mt-1 text-accent">
+                {job.url ? <a href={job.url} target="_blank" rel="noopener" class="hover:underline">{job.name}</a> : job.name}
+              </p>
+              <p class="mt-4 text-muted">{job.summary}</p>
+              <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink/80">
+                {job.highlights.map((h) => <li>{h}</li>)}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2 class="border-b border-line pb-4 text-sm font-medium tracking-[0.12em] text-muted uppercase" data-reveal data-rule>
+        {t('cv.education')}
+      </h2>
+      {
+        resume.education.map((school) => (
+          <div class="grid gap-4 border-b border-line py-10 md:grid-cols-[14rem_1fr]" data-reveal>
+            <p class="text-sm text-muted">{school.endDate}</p>
+            <div>
+              <h3 class="text-xl">
+                {school.studyType} {t('cv.in')} {school.area}
+              </h3>
+              <p class="mt-1 text-accent">{school.institution}</p>
+              <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink/80">
+                {school.courses.map((c) => <li set:html={c} />)}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2 class="border-b border-line pb-4 text-sm font-medium tracking-[0.12em] text-muted uppercase" data-reveal data-rule>
+        {t('cv.skills')}
+      </h2>
+      {
+        resume.skills.map((group) => (
+          <div class="border-b border-line py-10" data-reveal>
+            <h3 class="text-xl">{group.name}</h3>
+            <div class="mt-6 grid gap-8 md:grid-cols-2">
+              {group.subSkills.map((sub) => (
+                <div>
+                  <h4 class="text-sm font-medium text-accent">{sub.name}</h4>
+                  <ul class="mt-3 space-y-1.5 text-sm leading-relaxed text-ink/75">
+                    {sub.items.map((item) => <li set:html={item} />)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <h2 class="border-b border-line pb-4 text-sm font-medium tracking-[0.12em] text-muted uppercase" data-reveal data-rule>
+        {t('cv.volunteering')}
+      </h2>
+      {
+        resume.volunteer.map((v) => (
+          <div class="grid gap-4 border-b border-line py-10 md:grid-cols-[14rem_1fr]" data-reveal>
+            <p class="text-sm text-muted">{range(v.startDate, v.endDate)}</p>
+            <div>
+              <h3 class="text-xl">{v.position}</h3>
+              <p class="mt-1 text-accent">{v.organization}</p>
+              <p class="mt-4 text-muted">{v.summary}</p>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="grid gap-16 md:grid-cols-2">
+      <div data-reveal>
+        <h2 class="border-b border-line pb-4 text-sm font-medium tracking-[0.12em] text-muted uppercase" data-rule>{t('cv.languages')}</h2>
+        <ul class="mt-6 space-y-3">
+          {
+            resume.languages.map((l) => (
+              <li class="flex justify-between gap-4">
+                <span>{l.language}</span>
+                <span class="text-sm text-muted">{l.fluency}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div data-reveal>
+        <h2 class="border-b border-line pb-4 text-sm font-medium tracking-[0.12em] text-muted uppercase" data-rule>{t('cv.interests')}</h2>
+        {
+          resume.interests.map((i) => (
+            <div class="mt-6">
+              <h3 class="text-base text-accent">{i.name}</h3>
+              <ul class="mt-2 space-y-1 text-sm text-ink/75">
+                {i.keywords.map((k) => <li set:html={k} />)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Base>

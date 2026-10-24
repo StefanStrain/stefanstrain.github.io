@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import Stars from '../components/Stars.astro';
+import BookStatus from '../components/BookStatus.astro';
+import { entrySlug, localePath, useTranslations, type Lang } from '../i18n';
+import { getBooks } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const books = await getBooks(lang);
+---
+
+<Base lang={lang} title={t('books.title')} description={t('books.intro')}>
+  <section class="mx-auto max-w-6xl px-4 pt-40 sm:px-8" data-hero>
+    <h1 class="text-[clamp(2.5rem,7vw,5.5rem)] leading-none font-medium" data-split>
+      <span class="line"><span>{t('books.title')}</span></span>
+    </h1>
+    <p class="mt-6 max-w-xl text-muted" data-reveal>{t('books.intro')}</p>
+  </section>
+  <section class="mx-auto mt-20 grid max-w-6xl grid-cols-2 gap-x-6 gap-y-12 px-4 sm:grid-cols-3 sm:px-8 lg:grid-cols-4">
+    {
+      books.map((book) => (
+        <a href={localePath(lang, `/books/${entrySlug(book.id)}/`)} class="group block" data-reveal>
+          <div class="overflow-hidden rounded-lg bg-surface">
+            <img
+              src={`/${book.data.cover}`}
+              alt={`${t('books.cover')} ${book.data.title}`}
+              loading="lazy"
+              class="aspect-[2/3] w-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]"
+              transition:name={`book-cover-${entrySlug(book.id)}`}
+            />
+          </div>
+          <h2 class="mt-4 text-base leading-snug transition-colors group-hover:text-accent">{book.data.title}</h2>
+          <p class="mt-1 text-sm text-muted">{book.data.author}</p>
+          <div class="mt-2 flex flex-wrap items-center gap-2">
+            {book.data.stars && <Stars value={book.data.stars} lang={lang} />}
+            <BookStatus status={book.data.status} lang={lang} />
+          </div>
+        </a>
+      ))
+    }
+  </section>
+</Base>

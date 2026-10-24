@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { entryLang, entrySlug, localePath, useTranslations } from '../i18n';
+import { readingMinutes } from '../i18n/content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, img, tags } = project.data;
+const slug = entrySlug(project.id);
+const t = useTranslations(entryLang(project.id));
+---
+
+<a href={localePath(entryLang(project.id), `/projects/${slug}/`)} class="group block" data-reveal>
+  <div class="overflow-hidden rounded-xl border border-line bg-surface transition-[border-color,box-shadow] duration-500 group-hover:border-accent/50 group-hover:shadow-[0_20px_60px_-30px_var(--color-accent)]" data-wipe>
+    <img
+      src={`/${img}`}
+      alt=""
+      loading="lazy"
+      class:list={[
+        'aspect-[16/10] w-full transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]',
+        // diagrams must be shown whole; photos and scans can be cropped to fill the card
+        img.endsWith('.svg') ? 'object-contain' : 'object-cover',
+      ]}
+      transition:name={`project-img-${slug}`}
+    />
+  </div>
+  <h3 class="mt-5 flex items-baseline gap-2 text-xl text-ink transition-colors group-hover:text-accent">
+    <span transition:name={`project-title-${slug}`}>{title}</span>
+    <span aria-hidden="true" class="-translate-x-2 opacity-0 transition-[opacity,transform] duration-500 ease-out-expo group-hover:translate-x-0 group-hover:opacity-100">→</span>
+  </h3>
+  <p class="mt-2 line-clamp-2 text-sm leading-relaxed text-muted">{description}</p>
+  <p class="mt-3 text-xs tracking-wide text-muted">{readingMinutes(project.body)} {t('projects.readingTime')}</p>
+  <ul class="mt-4 flex flex-wrap gap-2">
+    {tags.slice(0, 4).map((tag) => <li class="rounded-full border border-line px-2.5 py-1 text-[0.7rem] text-muted">{tag}</li>)}
+  </ul>
+</a>

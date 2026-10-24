@@ -1,0 +1,190 @@
+---
+import { localePath, switchPath, useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const otherLang: Lang = lang === 'en' ? 'fr' : 'en';
+const links = [
+  { href: localePath(lang, '/projects/'), label: t('nav.projects') },
+  { href: localePath(lang, '/cv/'), label: t('nav.cv') },
+  // Books is switched off for now: put this link back and rename src/pages/_books and src/pages/fr/_books to books
+  // { href: localePath(lang, '/books/'), label: t('nav.books') },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-out-expo" data-nav>
+  <!-- A plain gradient instead of backdrop-blur: the blur left a hard edge across the hero glow -->
+  <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-linear-to-b from-bg via-bg/75 to-transparent"></div>
+  <nav
+    class="mx-auto flex max-w-6xl items-center gap-2 px-4 py-5 text-[0.7rem] font-medium uppercase tracking-[0.06em] sm:gap-6 sm:px-8 sm:text-[0.72rem] sm:tracking-[0.12em]"
+  >
+    <!-- the full name doesn't fit next to the links and toggles on phones -->
+    <a href={localePath(lang, '/')} class="mr-auto text-ink">
+      Stefan<span class="hidden sm:inline"> Strainovic</span>
+    </a>
+    {
+      links.map(({ href, label }) => (
+        <a
+          href={href}
+          class:list={[
+            'nav-link transition-colors duration-300 hover:text-ink',
+            path.startsWith(href) ? 'text-accent' : 'text-muted',
+          ]}
+        >
+          {label}
+        </a>
+      ))
+    }
+    <!-- The one filled element in the nav, so it stands out; on phones it shrinks to an icon -->
+    <button
+      type="button"
+      popovertarget="cv-download"
+      data-magnetic
+      aria-label={t('nav.downloadCv')}
+      class="flex items-center gap-1.5 rounded-full bg-accent-2 p-2 text-bg shadow-[0_0_24px_-4px_var(--color-accent-2)] transition-[transform,box-shadow] duration-300 hover:-translate-y-px hover:shadow-[0_0_32px_-2px_var(--color-accent-2)] sm:px-3.5 sm:py-1.5"
+    >
+      <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path>
+      </svg>
+      <span class="hidden sm:inline">{t('nav.downloadCv')}</span>
+    </button>
+    <a
+      href={switchPath(Astro.url, otherLang)}
+      hreflang={otherLang}
+      aria-label={t('nav.language')}
+      title={t('nav.language')}
+      class="rounded-full border border-line px-2 py-1 text-muted transition-colors hover:border-accent hover:text-ink"
+    >
+      {otherLang}
+    </a>
+    <button
+      type="button"
+      data-theme-toggle
+      aria-label={t('nav.theme')}
+      class="grid size-8 place-items-center rounded-full text-muted transition-colors hover:text-ink sm:-mr-2"
+    >
+      <!-- moon shows in dark mode, sun in light mode -->
+      <svg class="theme-icon-dark size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+      </svg>
+      <svg class="theme-icon-light size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<!-- Native popover: opens from the nav button, closes on Esc or a click outside, no script needed -->
+<div id="cv-download" popover class="cv-popover">
+  <div class="flex items-start justify-between gap-6">
+    <div>
+      <h2 class="text-2xl font-medium">{t('download.title')}</h2>
+      <p class="mt-2 text-sm text-muted">{t('download.intro')}</p>
+    </div>
+    <button
+      type="button"
+      popovertarget="cv-download"
+      popovertargetaction="hide"
+      aria-label={t('download.close')}
+      class="-mt-1 -mr-1 grid size-8 shrink-0 place-items-center rounded-full text-muted transition-colors hover:text-ink"
+    >
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mt-6 grid gap-3 sm:grid-cols-2">
+    {
+      [
+        { file: 'CV-EN.pdf', name: 'English', code: 'EN' },
+        { file: 'CV-FR.pdf', name: 'Français', code: 'FR' },
+      ].map(({ file, name, code }) => (
+        <a
+          href={`/assets/pdf/${file}`}
+          download={`Stefan-Strainovic-CV-${code}.pdf`}
+          class="group flex items-center justify-between rounded-xl border border-line bg-surface px-5 py-4 transition-colors hover:border-accent"
+        >
+          <span>
+            <span class="block text-lg text-ink">{name}</span>
+            <span class="text-xs tracking-wide text-muted">PDF · 1 page</span>
+          </span>
+          <span class="grid size-9 place-items-center rounded-full bg-accent/15 text-accent transition-colors group-hover:bg-accent group-hover:text-bg">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path>
+            </svg>
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .cv-popover {
+    width: min(30rem, calc(100vw - 2rem));
+    margin: auto;
+    padding: 1.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: 1.25rem;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.55);
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    transition:
+      opacity 0.35s var(--ease-out-expo),
+      transform 0.35s var(--ease-out-expo),
+      overlay 0.35s allow-discrete,
+      display 0.35s allow-discrete;
+  }
+  .cv-popover:popover-open {
+    opacity: 1;
+    transform: none;
+  }
+  @starting-style {
+    .cv-popover:popover-open {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+  }
+  .cv-popover::backdrop {
+    background: rgb(0 0 0 / 0.45);
+    backdrop-filter: blur(4px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cv-popover { transition: none; }
+  }
+
+  /* a thin line sweeps in under the hovered or current link */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  .nav-link:hover::after,
+  .nav-link.text-accent::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  :global([data-theme='light']) .theme-icon-dark,
+  :global([data-theme='dark']) .theme-icon-light {
+    display: none;
+  }
+</style>
